@@ -6,12 +6,12 @@ var browserSync = require('browser-sync').create();
 var serveConfig = require('./bs-config.js');
 
 var excluded_files = [
-  '!./node_modules/**/*',
-  '!./.c9/**/*',
-  '!./.git/**/*',
+  '!./node_modules/*',
+  '!./.c9/**',
+  '!./.git/*',
 ];
 
-var templateFiles = ['./**/*.html'].concat(excluded_files);
+var templateFiles = ['./index.html', './client/**/*.html'].concat(excluded_files);
 var scriptFiles = ['./client/**/*.js'].concat(excluded_files);
 var styleFiles = ['./styles/**/*.scss', './styles/**/*.css'].concat(excluded_files);
 
@@ -65,9 +65,13 @@ gulp.task('clean:build', function() {
 gulp.task('build', ['clean:build', 'build:styles', 'build:templates', 'build:scripts']);
 
 gulp.task('serve', ['clean:build', 'build'], function() {
+  console.log('Start server...');
   browserSync.init(serveConfig);
+  console.log('Start watching... scripts');
   gulp.watch(scriptFiles, ['build:scripts']);
+  console.log('Start watching... templates');
   gulp.watch(templateFiles, ['build:templates']);
+  console.log('Start watching... styles');
   gulp.watch(styleFiles, ['build:styles']);
 });
 

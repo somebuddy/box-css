@@ -2,6 +2,9 @@ var gulp = require('gulp');
 var del = require('del');
 var sass = require('gulp-sass');
 
+var browserSync = require('browser-sync').create();
+var serveConfig = require('./bs-config.js');
+
 var excluded_files = [
   '!./node_modules/**/*',
   '!./.c9/**/*',
@@ -62,7 +65,7 @@ gulp.task('clean:build', function() {
 gulp.task('build', ['clean:build', 'build:styles', 'build:templates', 'build:scripts']);
 
 gulp.task('serve', ['clean:build', 'build'], function() {
-
+  browserSync.init(serveConfig);
 });
 
 gulp.task('default', ['serve']);

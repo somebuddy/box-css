@@ -66,6 +66,9 @@ gulp.task('build', ['clean:build', 'build:styles', 'build:templates', 'build:scr
 
 gulp.task('serve', ['clean:build', 'build'], function() {
   browserSync.init(serveConfig);
+  gulp.watch(scriptFiles, ['build:scripts']);
+  gulp.watch(templateFiles, ['build:templates']);
+  gulp.watch(styleFiles, ['build:styles']);
 });
 
 gulp.task('default', ['serve']);

@@ -4,6 +4,8 @@
   "description": "CSS components",
   "main": "app/index.html",
   "scripts": {
+    "start": "npm run lite",
+    "lite": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/somebuddy/box-ui/issues"
   },
-  "homepage": "https://github.com/somebuddy/box-ui#readme"
+  "homepage": "https://github.com/somebuddy/box-ui#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "angular2": "2.0.0-beta.14",
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "^0.1.2",
+    "rxjs": "^5.0.0-beta.2",
+    "zone.js": "^0.6.10"
+  }
 }

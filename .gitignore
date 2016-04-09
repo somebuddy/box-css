@@ -1,2 +1,6 @@
 .sass-cache/
 *.css.map
+build/
+node_modules/
+npm-debug.log
+.c9/

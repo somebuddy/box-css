@@ -1,0 +1,40 @@
+// Sans-serif font: Roboto
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300italic,400italic,500italic,700italic,900italic);
+// Condensed font: Roboto Condensed
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700,300italic,400italic,700italic);
+// Serif: Merriweather
+@import url(https://fonts.googleapis.com/css?family=Merriweather:400italic,400,900,300italic,300,700,700italic,900italic);
+// Mono: Ubuntu (sans-serif) and Anonymous Pro (serif)
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro:700,400,700italic,400italic);
+
+// Font family sets:
+$font-families: (
+  sans: (Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif),
+  condensed: ("Roboto Condensed", "Open Sans Condensed", "Helvetica Condensed", "Arial Narrow", sans-serif),
+  slab: ("Roboto Slab", Helvetica, Arial, sans-serif),
+  serif: ("Merriweather", "Times New Roman", Times, serif),
+  mono: ("Ubuntu Mono", Consolas, monaco, monospace),
+  mono-serif: ("Anonymous Pro", Consolas, monaco, monospace),
+);
+
+@function font-family($key) {
+  @if map-has-key($font-families, $key) {
+    @return map-get($font-families, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $font-families.";
+  @return null;
+}
+
+$font-family-default: font-family(sans) !default;
+$font-family-mono-default: font-family(mono) !default;
+
+// CSS classes
+
+@each $family, $value in $font-families {
+  .font-#{$family} {
+    font-family: $value;
+  }
+}

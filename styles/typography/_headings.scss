@@ -1,0 +1,49 @@
+/* Variables */
+$header-color: #111;
+$subheader-color: lighter(#111, 10%);
+$heading-base-font-weight: 400;
+$base-font-size: 1rem;
+
+$heading-sizes: (
+  h1: 2.25,
+  h2: 2,
+  h3: 1.75,
+  h4: 1.5,
+  h5: 1.25,
+  h6: 0.9375
+);
+
+/* Mixins */
+@mixin heading-styles($fs: $body-font-size, $ln: $line-height) {
+  @each $el, $size in $heading-sizes {
+    #{$el}, .#{$el} {
+      font-size: $fs * $size;
+      line-height: ceil($fs * $size / $ln) * $ln;
+    }
+  }
+}
+
+@function headings($from:1, $to:6) {
+  @if $from == $to {
+    @return 'h#{$from}, .h#{$from}';
+  } @else {
+    @return 'h#{$from}, .h#{$from},' + headings($from + 1, $to);
+  }
+}
+
+/* Styles */
+@include heading-styles();
+h1, h2, h3 { font-weight: max($heading-base-font-weight - 100, 100); }
+h4, h5 { font-weight: $heading-base-font-weight; }
+h6 { font-weight: min($heading-base-font-weight + 100, 900); }
+
+#{headings()} {
+  margin: $line-height 0;
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
+
+  small, .small {
+    display: inline;
+    font-size: 0.75em;
+  }
+}

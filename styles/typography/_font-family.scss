@@ -15,8 +15,8 @@ $font-families: (
   condensed: ("Roboto Condensed", "Open Sans Condensed", "Helvetica Condensed", "Arial Narrow", sans-serif),
   slab: ("Roboto Slab", Helvetica, Arial, sans-serif),
   serif: ("Merriweather", "Times New Roman", Times, serif),
-  mono: ("Ubuntu Mono", Consolas, monaco, monospace),
-  mono-serif: ("Anonymous Pro", Consolas, monaco, monospace),
+  mono: ("Ubuntu Mono", "Courier New", Courier, monaco, monospace),
+  mono-serif: ("Anonymous Pro", Consolas, "Lucida Console", monaco, monospace),
 );
 
 @function font-family($key) {
@@ -26,15 +26,9 @@ $font-families: (
 
   @warn "Unknown `#{$key}` in $font-families.";
   @return null;
-}
+};
 
-$font-family-default: font-family(sans) !default;
-$font-family-mono-default: font-family(mono) !default;
-
-// CSS classes
-
+// CSS helpers classes
 @each $family, $value in $font-families {
-  .font-#{$family} {
-    font-family: $value;
-  }
+  .font-#{$family} { font-family: $value; }
 }

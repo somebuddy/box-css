@@ -1,4 +1,4 @@
-$base-font-size: 20px !default;
+$base-font-size: 16px !default;
 $line-height: 1.5rem !default;
 
 html, body {
@@ -12,8 +12,7 @@ html {
 }
 
 body {
-  font-size: 1rem;
+  font-size: $body-font-size;
   line-height: $line-height;
   overflow-y: auto;
-  font-family: $font-family-default;
 }

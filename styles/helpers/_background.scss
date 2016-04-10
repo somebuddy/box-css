@@ -1,0 +1,19 @@
+@mixin striped-background($base-color: white, $color1: transparent, $color2: transparent, $line-height: $line-height) {
+  background: linear-gradient(
+      to bottom,
+      $color1,
+      $color1 50%,
+      $color2 50%,
+      $color2
+  ), $base-color;
+
+  background-size: 100% $line-height * 2;
+}
+
+.striped-gray-background {
+  @include striped-background(white, $color1: rgba(0,0,0,.1));
+}
+
+body {
+  @include striped-background(white, $color1: rgba(0,0,0,.1));
+}

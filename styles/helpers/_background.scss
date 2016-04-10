@@ -14,6 +14,6 @@
   @include striped-background(white, $color1: rgba(0,0,0,.1));
 }
 
-body {
+.example {
   @include striped-background(white, $color1: rgba(0,0,0,.1));
 }

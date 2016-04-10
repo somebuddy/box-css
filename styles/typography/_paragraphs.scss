@@ -1,0 +1,28 @@
+$font-size-variations: (
+  large: 1.375,
+  lead: 1.25,
+  bigger: 1.125,
+  smaller: 0.875,
+  small: 0.75,
+);
+
+p {
+  font-size: $paragraph-font-size;
+  line-height: $line-height;
+  margin: 0;
+
+  & + p {
+    margin-top: $line-height;
+  }
+}
+
+@mixin paragraph-styles($fs: $paragraph-font-size, $ln: $line-height) {
+  @each $el, $size in $font-size-variations {
+    p.#{$el}, .text-#{$el} {
+      font-size: $fs * $size;
+      line-height: ceil($fs * $size / $ln) * $ln;
+    }
+  }
+}
+
+@include paragraph-styles;

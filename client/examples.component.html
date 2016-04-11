@@ -229,10 +229,40 @@
           <p><code>@include fixed(0, 0, 0, 0);</code></p>
         </section>
 
-        <h4></h4>
-        <p></p>
+        <h4>Flex-box based container</h4>
+        <p>
+          Name: <code>flex-container</code><br>
+          Parameters: <code>$display: flex, $direction: row, $wrap: nowrap</code><br>
+        </p>
         <section class="example">
-          <p class="font-slab"></p>
+          <p><code>@include flex-container($wrap: wrap);</code></p>
+        </section>
+
+        <h4>Flex-box container inner content align</h4>
+        <p>
+          Name: <code>flex-align</code><br>
+          Parameters: <code>$align: stretch, $align-content: flex-start, $justify: flex-start</code><br>
+        </p>
+        <section class="example">
+          <p><code>@include flex-align;</code></p>
+        </section>
+
+        <h4>Flex-box container child element with fixed size</h4>
+        <p>
+          Name: <code>flex-child-fixed</code><br>
+          Parameters: <code>$display: flex, $direction: row, $wrap: nowrap</code><br>
+        </p>
+        <section class="example">
+          <p><code>@include flex-child-fixed;</code></p>
+        </section>
+
+        <h4>Flex-box container child element with fluid size</h4>
+        <p>
+          Name: <code>flex-child-fluid</code><br>
+          Parameters: <code>$weight: 1</code><br>
+        </p>
+        <section class="example">
+          <p><code>@include flex-child-fluid(2);</code></p>
         </section>
 
         <h4></h4>

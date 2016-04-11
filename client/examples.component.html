@@ -192,6 +192,14 @@
         <section class="example">
           <p><code>@include size(100%, 100%);</code></p>
         </section>
+        <p>
+          Name: <code>min-size</code><br>
+          Parameters: <code>width, height</code><br>
+        </p>
+        <p>
+          Name: <code>max-size</code><br>
+          Parameters: <code>width, height</code><br>
+        </p>
 
         <h4>Position shortcuts</h4>
         <p>
@@ -238,6 +246,15 @@
           <p><code>@include flex-container($wrap: wrap);</code></p>
         </section>
 
+        <h4>Inline Flex-box based container</h4>
+        <p>
+          Name: <code>flex-inline</code><br>
+          Parameters: <code>$direction: row, $wrap: nowrap</code><br>
+        </p>
+        <section class="example">
+          <p><code>@include flex-inline($wrap: wrap);</code></p>
+        </section>
+
         <h4>Flex-box container inner content align</h4>
         <p>
           Name: <code>flex-align</code><br>
@@ -246,6 +263,30 @@
         <section class="example">
           <p><code>@include flex-align;</code></p>
         </section>
+
+        <h4>Flex-box container inner content align shorthands</h4>
+        <p>
+          Name: <code>flex-align-middle</code><br>
+          Name: <code>flex-align-stretch</code><br>
+          Name: <code>flex-align-top</code><br>
+          Name: <code>flex-align-bottom</code><br>
+          Name: <code>flex-align-center</code><br>
+          Name: <code>flex-align-left</code><br>
+          Name: <code>flex-align-right</code><br>
+        </p>
+        <section class="example"></section>
+
+        <h4>Flex-box container with align shorthands</h4>
+        <p>
+          Name: <code>flex-center</code><br>
+          Name: <code>flex-inline-center</code><br>
+          Name: <code>flex-middle-left</code><br>
+          Name: <code>flex-row</code><br>
+          Name: <code>flex-rows</code><br>
+          Name: <code>flex-column</code><br>
+          Name: <code>flex-columns</code><br>
+        </p>
+        <section class="example"></section>
 
         <h4>Flex-box container child element with fixed size</h4>
         <p>

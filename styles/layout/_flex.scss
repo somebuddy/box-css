@@ -1,14 +1,84 @@
+// Flexbox
 @mixin flex-container($display: flex, $direction: row, $wrap: nowrap) {
   display: $display;
   flex-flow: $direction $wrap;
 }
 
+@mixin flex-inline($args...) {
+  @include flex-container(inline-flex, $args...);
+}
+
+// Children Align
 @mixin flex-align($align: stretch, $align-content: flex-start, $justify: flex-start) {
   align-content: $align-content;
   align-items: $align;
   justify-content: $justify;
 }
 
+@mixin flex-align-middle {
+  @include flex-align(center, center);
+}
+
+@mixin flex-align-stretch {
+  @include flex-align(stretch, stretch);
+}
+
+@mixin flex-align-top {
+  @include flex-align(flex-start, flex-start);
+}
+
+@mixin flex-align-bottom {
+  @include flex-align(flex-end, flex-end);
+}
+
+@mixin flex-align-center {
+  @include flex-align($justify: center);
+}
+
+@mixin flex-align-left {
+  @include flex-align($justify: flex-start);
+}
+
+@mixin flex-align-right {
+  @include flex-align($justify: flex-end);
+}
+
+// Flex blocks shorthands
+@mixin flex-center {
+  @include flex-container;
+  @include flex-align(center, center, center);
+}
+
+@mixin flex-inline-center {
+  @include flex-inline;
+  @include flex-align(center, center, center);
+}
+
+@mixin flex-middle-left {
+  @include flex-container;
+  @include flex-align(center, center);
+}
+
+@mixin flex-row {
+  @include flex-container;
+  @include flex-align(stretch, stretch);
+}
+
+@mixin flex-rows {
+  @include flex-row;
+  flex-wrap: wrap;
+}
+
+@mixin flex-column {
+  @include flex-container($direction: column);
+}
+
+@mixin flex-columns {
+  @include flex-column;
+  flex-wrap: wrap;
+}
+
+// Children size
 @mixin flex-child-fixed {
   flex-grow: 0;
   flex-shrink: 0;

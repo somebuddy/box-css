@@ -1,7 +1,9 @@
 @import "settings/default";
+@import 'resets/resets';
+
 @import 'typography/typography';
 @import 'helpers/helpers';
 @import 'layout/layout';
 
-@import 'resets/resets';
+@import 'containers/containers';
 @import 'site/site';

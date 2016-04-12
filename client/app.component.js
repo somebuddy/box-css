@@ -1,14 +1,10 @@
+/* global ng */
+
 (function(app) {
   app.AppComponent =
     ng.core.Component({
       selector: 'box-ui-app',
-      template: `
-        <nav>
-          <a [routerLink]="['Docs']">Docs</a>
-          <a [routerLink]="['Examples']">Examples</a>
-        </nav>
-        <router-outlet></router-outlet>
-      `,
+      templateUrl: 'app.component.html',
       directives: [ng.router.ROUTER_DIRECTIVES],
     })
     .Class({
@@ -16,7 +12,7 @@
         router.config([
           { path: '/docs', component: app.DocsComponent, name: 'Docs' },
           { path: '/examples', component: app.ExamplesComponent, name: 'Examples' }
-        ])
+        ]);
       }]
     });
 

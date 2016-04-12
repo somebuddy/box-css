@@ -1,0 +1,5 @@
+.page {
+  @include size(100%, 100%);
+  overflow-y: auto;
+  position: relative;
+}

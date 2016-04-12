@@ -36,6 +36,53 @@ $hamburger-line-width: 3px;
   }
 }
 
+/* Hover arrow */
+.hamburger-button:hover > .lines,
+*:hover > .hamburger-button > .lines {
+  opacity: 1;
+  transform: rotate(-90deg) scale(0.6);
+  transition: all .35s ease;
+
+  &:after, &:before {
+    transform-origin: 2px center;
+    width: 1em;
+    transition: all .35s ease;
+  }
+
+  &:after {
+    transform: rotate(35deg);
+    top: 1px;
+  }
+
+  &:before {
+    transform: rotate(-35deg);
+    top: -1px;
+  }
+}
+
+/* Expanded state arrow */
+*:not(.collapsed) > .hamburger-button > .lines {
+  opacity: 1;
+  transform: rotate(90deg) scale(0.6);
+  transition: all .35s ease;
+
+  &:after, &:before {
+    transform-origin: 2px center;
+    width: 1em;
+    transition: all .35s ease;
+  }
+
+  &:after {
+    transform: rotate(35deg);
+    top: 1px;
+  }
+
+  &:before {
+    transform: rotate(-35deg);
+    top: -1px;
+  }
+}
+
 @mixin hamburger-button-colorize($cls: null, $color: white) {
   $selector: if($cls, #{".hamburger-button." + $cls}, ".hamburger-button");
   #{$selector} {

@@ -1,0 +1,18 @@
+$line-height: 1.5rem !default;
+$col-width: 1rem !default;
+$navbar-height: $line-height * 2;
+
+.navbar {
+  @include flex-row;
+  @include reset-link;
+  min-height: $navbar-height;
+  
+  a {
+    @include flex-center;
+    padding: 0 $col-width;
+    
+    &:hover {
+      background-color: rgba(255,255,255,.1);
+    }
+  }
+}

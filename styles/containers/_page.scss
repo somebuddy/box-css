@@ -15,7 +15,6 @@ $footer-font-size: 0.75rem;
   @include flex-column;
   overflow-y: auto;
 
-  > nav,
   > header, .page-header,
   > .content, .page-content,
   > aside, .page-aside,

@@ -1,0 +1,20 @@
+.page > nav {
+  background: #555;
+  color: white;
+}
+.page > header, .page .page-header {
+  background: #d50000;
+  color: white;
+}
+.page > .content, .page .page-content {
+  background: rgba(235, 235, 255, 0.9);
+}
+.page > aside, .page .page-aside {
+  background: #a7fd00;
+  color: white;
+}
+
+.page > footer, .page .page-footer {
+  background: #555;
+  color: white;
+}

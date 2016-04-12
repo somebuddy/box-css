@@ -1,3 +1,5 @@
+$line-height: 1.5rem !default;
+
 @mixin striped-background($base-color: white, $color1: transparent, $color2: transparent, $line-height: $line-height) {
   background: linear-gradient(
       to bottom,

@@ -1,6 +1,5 @@
 @mixin reset-link($cls: null) {
   $selector: if($cls, "a.#{$cls}", "a");
-  @debug $selector;
 
   #{$selector} {
     &, &:hover, &:active, &:focus {

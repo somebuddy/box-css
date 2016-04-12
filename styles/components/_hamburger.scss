@@ -1,0 +1,57 @@
+$line-height: 1.5rem !default;
+$hamburger-line-width: 3px;
+
+.hamburger-button {
+  @include flex-inline;
+  cursor: pointer;
+  
+  & > * {
+    margin: 0 $line-height/2;
+  }
+
+  > .lines {
+    position: relative;
+    margin-top: calc(#{$line-height} - 1px);
+    margin-bottom: calc(#{$line-height} - 2px);
+    opacity: 0.5;
+
+    &, &:after, &:before {
+      @include size(#{$line-height}, $hamburger-line-width);
+      border-radius: 2px;
+      transition: all .5s ease;
+    }
+
+    &:after, &:before {
+      content: '';
+      @include absolute($left: 0, $right: 0);
+    }
+
+    &:after {
+      top: 6px;
+    }
+
+    &:before {
+      top: -6px;
+    }
+  }
+}
+
+@mixin hamburger-button-colorize($cls: null, $color: white) {
+  $selector: if($cls, #{".hamburger-button." + $cls}, ".hamburger-button");
+  #{$selector} {
+    color: transparentize($color, 0.5);
+
+    &:hover {
+      color: $color;
+    }
+
+    > .lines {
+      &, &:after, &:before {
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@include hamburger-button-colorize;
+@include hamburger-button-colorize(black, black);

@@ -71,6 +71,7 @@
 
 @mixin flex-column {
   @include flex-container($direction: column);
+  @include flex-align(stretch, stretch);
 }
 
 @mixin flex-columns {
@@ -79,12 +80,14 @@
 }
 
 // Children size
-@mixin flex-child-fixed {
+@mixin flex-child-fixed($basis: auto) {
   flex-grow: 0;
   flex-shrink: 0;
+  flex-basis: $basis;
 }
 
-@mixin flex-child-fluid($weight: 1) {
+@mixin flex-child-fluid($weight: 1, $basis: auto) {
   flex-grow: $weight;
   flex-shrink: $weight;
+  flex-basis: $basis;
 }

@@ -19,8 +19,7 @@ $secondary-opacity: .6;
 
   /* Default child styles */
   > * {
-    @include flex-container(inline-flex);
-    @include flex-align-middle;
+    @include flex-middle-left;
     @include flex-child-fixed(auto);
     margin-right: $row-child-margin;
 

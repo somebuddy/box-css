@@ -7,6 +7,8 @@ $brand-icon-size: $line-height * 2;
 /* Brand element */
 .brand {
   @include flex-inline;
+  @include reset-link;
+
   cursor: pointer;
   opacity: $secondary-opacity;
   margin: 0 $column-width;
@@ -28,5 +30,4 @@ $brand-icon-size: $line-height * 2;
     transition: opacity .5s ease, color .3s ease .5s;
   }
 
-  @include reset-link;
 }

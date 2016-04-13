@@ -1,0 +1,5 @@
+@mixin text-ellipsis ($white-space: normal) {
+  overflow: hidden;
+  white-space: $white-space;
+  text-overflow: ellipsis;
+}

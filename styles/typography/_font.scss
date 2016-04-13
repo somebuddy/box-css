@@ -105,3 +105,15 @@ $font-family-mono: font-family(mono) !default;
     text-shadow: bottom-shadow($i), top-shadow($i);
   }
 }
+
+// Body font
+
+@mixin body-font {
+  font-family: $font-family-default;
+  line-height: $line-height;
+  font-weight: $body-font-weight;
+}
+
+.body-font {
+  @include body-font;
+}

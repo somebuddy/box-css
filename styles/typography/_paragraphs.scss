@@ -9,11 +9,11 @@ $font-size-variations: (
 p {
   font-size: $paragraph-font-size;
   line-height: $line-height;
-  margin: 0;
+  text-rendering: optimizelegibility;
+  margin: $line-height 0;
 
-  & + p {
-    margin-top: $line-height;
-  }
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
 }
 
 @mixin paragraph-styles($fs: $paragraph-font-size, $ln: $line-height) {

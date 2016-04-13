@@ -1,0 +1,39 @@
+
+$line-height: 1.5rem !default;
+$col-width: 1rem !default;
+$column-border-width: 0 !default;
+$column-child-margin: $line-height/2 !default;
+$column-padding: $column-child-margin;
+
+@mixin column-layout {
+  @include flex-column;
+  border-left: $column-border-width solid transparent;
+  border-right: $column-border-width solid transparent;
+  padding: $column-padding 0 0 0;
+  margin: 0;
+  line-height: $line-height;
+
+  /* Default child styles */
+  > * {
+    @include flex-container(inline-flex);
+    @include flex-align-middle;
+    @include flex-child-fixed(auto);
+    margin-bottom: $column-child-margin;
+
+    &:last-child { margin-bottom: $column-padding; }
+  }
+
+  > .fluid {
+    @include flex-child-fluid($basis: auto);
+  }
+}
+
+@mixin column-components {
+
+}
+
+.column {
+  @include column-layout;
+  @include row-components;
+  min-width: $col-width*2;
+}

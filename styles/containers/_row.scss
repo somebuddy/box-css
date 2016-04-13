@@ -6,6 +6,9 @@ $row-border-width: 2px;
 $row-padding: $column-width;
 $row-child-margin: $column-width;
 
+$row-marker-size: $line-height;
+$secondary-opacity: .6;
+
 @mixin row-layout {
   @include flex-row;
   border-top: $row-border-width solid transparent;
@@ -23,10 +26,53 @@ $row-child-margin: $column-width;
 
     &:last-child { margin-right: $row-padding; }
   }
+
+  > .fluid {
+    @include flex-child-fluid($basis: auto);
+  }
+}
+
+// components
+
+@mixin row-marker {
+  /* Rules for first row element (icon, avatar, checkbox etc.) */
+  flex-basis: $row-marker-size;
+  order: -1;
+}
+
+@mixin row-filler {
+  /* Element that fill free space in row */
+  @include flex-child-fluid($basis: 0);
+  min-width: 0;
+}
+
+@mixin row-text-line {
+  /* One line text in row */
+  @include text-ellipsis;
+  font-weight: 400;
+}
+
+@mixin row-column {
+  /* Fixed minimum size without padding */
+  @include flex-child-fluid(0, $column-width);
+  flex-grow: 1;
+  justify-content: center;
+}
+
+@mixin row-components {
+  /* Row with set of predefined child elements */
+  > .row-icon { @include row-marker; }
+  > .title, > .label { @include row-text-line; }
+  > .title, > .filler { @include row-filler; }
+  > .icon, > .spacer { @include row-column; }
+
+  &.right > .row-icon { order: 999; }
+  > .static { opacity: $secondary-opacity; }
 }
 
 .row {
   @include row-layout;
+  @include row-components;
   width: 100%;
   min-height: $line-height*2;
 }

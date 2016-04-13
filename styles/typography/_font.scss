@@ -61,6 +61,10 @@ $font-family-mono: font-family(mono) !default;
   }
 }
 
+// Style
+.font-italic { font-style: italic }
+.font-oblique { font-style: oblique }
+
 // Weight
 .font-ultra-light { font-weight: 100; }
 .font-light { font-weight: 300; }
@@ -94,3 +98,10 @@ $font-family-mono: font-family(mono) !default;
 // Wrapping
 .text-nowrap { white-space: nowrap; }
 .text-pre-wrap { white-space: pre-wrap; }
+
+// Text with shadow
+@for $i from 1 through 5 {
+  .text-shadow-#{$i} {
+    text-shadow: bottom-shadow($i), top-shadow($i);
+  }
+}

@@ -41,9 +41,9 @@ $footer-font-size: 0.75rem;
   @media (min-height: 60rem) {
     > nav {
       @include fixed(0, 0, auto, 0);
+      @include box-shadow(2);
       height: $navbar-height;
       z-index: 1000;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
     > header {

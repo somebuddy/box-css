@@ -58,12 +58,29 @@ $secondary-opacity: .6;
   justify-content: center;
 }
 
+@mixin row-cell {
+  /* element that has own padding and zero margin */
+  padding: 0 $column-width;
+  margin: 0;
+  margin-left: -$column-width;
+  &:first-child { margin-left: $row-padding; }
+  & + .block { margin-left: $column-width; }
+}
+
+@mixin row-block {
+  /* element with own height */
+  align-self: center;
+  & + .cell { margin-left: 0; }
+}
+
 @mixin row-components {
   /* Row with set of predefined child elements */
   > .row-icon { @include row-marker; }
   > .title, > .label { @include row-text-line; }
   > .title, > .filler { @include row-filler; }
   > .icon, > .spacer { @include row-column; }
+  > .cell, > .toolbar, > nav { @include row-cell; }
+  > .block { @include row-block; }
 
   &.right > .row-icon { order: 999; }
   > .static { opacity: $secondary-opacity; }

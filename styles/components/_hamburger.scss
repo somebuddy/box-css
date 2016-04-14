@@ -1,13 +1,11 @@
 $line-height: 1.5rem !default;
+$column-width: 1rem !default;
 $hamburger-line-width: 3px;
 
 .hamburger-button {
   @include flex-inline;
+  @include row-layout;
   cursor: pointer;
-  
-  & > * {
-    margin: 0 $line-height/2;
-  }
 
   > .lines {
     position: relative;
@@ -16,8 +14,8 @@ $hamburger-line-width: 3px;
     opacity: 0.5;
 
     &, &:after, &:before {
-      @include size(#{$line-height}, $hamburger-line-width);
-      border-radius: 2px;
+      @include size($line-height, $hamburger-line-width);
+      border-radius: 3px;
       transition: all .5s ease;
     }
 
@@ -26,22 +24,23 @@ $hamburger-line-width: 3px;
       @include absolute($left: 0, $right: 0);
     }
 
-    &:after {
-      top: 6px;
-    }
-
-    &:before {
-      top: -6px;
-    }
+    &:after { top: 6px; }
+    &:before { top: -6px; }
   }
 }
 
-/* Hover arrow */
-.hamburger-button:hover > .lines,
-*:hover > .hamburger-button > .lines {
+.hamburger-button:hover > .lines {
   opacity: 1;
-  transform: rotate(-90deg) scale(0.6);
   transition: all .35s ease;
+  
+  &:after { top: 10px; }
+  &:before { top: -10px; }
+}
+
+/* Hover arrow */
+.hamburger-button.hover-to-arrow-down:hover > .lines,
+*:hover.hover-to-arrow-down > .hamburger-button > .lines {
+  transform: rotate(-90deg) scale(0.6);
 
   &:after, &:before {
     transform-origin: 2px center;
@@ -61,7 +60,7 @@ $hamburger-line-width: 3px;
 }
 
 /* Expanded state arrow */
-*:not(.collapsed) > .hamburger-button > .lines {
+.expanded > .hamburger-button > .lines {
   opacity: 1;
   transform: rotate(90deg) scale(0.6);
   transition: all .35s ease;
@@ -102,3 +101,4 @@ $hamburger-line-width: 3px;
 
 @include hamburger-button-colorize;
 @include hamburger-button-colorize(black, black);
+@include hamburger-button-colorize(red, #d50000);

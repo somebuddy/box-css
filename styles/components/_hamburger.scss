@@ -32,32 +32,56 @@ $hamburger-line-width: 3px;
 .hamburger-button:hover > .lines {
   opacity: 1;
   transition: all .35s ease;
-  
+
   &:after { top: 10px; }
   &:before { top: -10px; }
 }
 
-/* Hover arrow */
-.hamburger-button.hover-to-arrow-down:hover > .lines,
-*:hover.hover-to-arrow-down > .hamburger-button > .lines {
-  transform: rotate(-90deg) scale(0.6);
+/**
+* Hover-to-* effects
+**/
 
-  &:after, &:before {
-    transform-origin: 2px center;
-    width: 1em;
-    transition: all .35s ease;
-  }
+.hamburger-button:hover,
+*:hover.hover-to-arrow-down {
+  &[class^="hover-to-arrow-"], &[class*=" hover-to-arrow-"] {
+    & > .lines {
+      &:after, &:before {
+        transform-origin: 2px center;
+        width: 1em;
+        transition: all .35s ease;
+      }
 
-  &:after {
-    transform: rotate(35deg);
-    top: 1px;
-  }
+      &:after {
+        top: 1px;
+        transform: rotate(35deg);
+      }
 
-  &:before {
-    transform: rotate(-35deg);
-    top: -1px;
+      &:before {
+        top: -1px;
+        transform: rotate(-35deg);
+      }
+    }
   }
 }
+
+@mixin hover-to-arrow-rotate($cls, $deg: 360deg) {
+  .hamburger-button.hover-to-arrow-#{$cls}:hover > .lines,
+  *:hover.hover-to-arrow-#{$cls} > .hamburger-button > .lines {
+    transform: rotate(#{$deg}) scale(0.6);
+  }
+}
+
+/* Arrow down */
+@include hover-to-arrow-rotate(down, 270deg);
+
+/* Arrow up */
+@include hover-to-arrow-rotate(up, -270deg);
+
+/* Arrow left */
+@include hover-to-arrow-rotate(left);
+
+/* Arrow right */
+@include hover-to-arrow-rotate(right, -180deg);
 
 /* Expanded state arrow */
 .expanded > .hamburger-button > .lines {

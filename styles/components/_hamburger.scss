@@ -1,6 +1,8 @@
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $hamburger-line-width: 3px;
+$inactive-opacity: .4;
+$hover-opacity: 1;
 
 .hamburger-button {
   @include flex-inline;
@@ -9,33 +11,40 @@ $hamburger-line-width: 3px;
 
   > .lines {
     position: relative;
-    margin-top: calc(#{$line-height} - 1px);
-    margin-bottom: calc(#{$line-height} - 2px);
-    opacity: 0.5;
+    opacity: $inactive-opacity;
 
-    &, &:after, &:before {
-      @include size($line-height, $hamburger-line-width);
-      border-radius: 3px;
-      transition: all .5s ease;
-    }
+    &, &:after, &:before { transition: all .35s ease; }
 
     &:after, &:before {
       content: '';
       @include absolute($left: 0, $right: 0);
     }
-
-    &:after { top: 6px; }
-    &:before { top: -6px; }
   }
 }
 
-.hamburger-button:hover > .lines {
-  opacity: 1;
-  transition: all .35s ease;
+.hamburger-button:hover > .lines { opacity: $hover-opacity; }
 
-  &:after { top: 10px; }
-  &:before { top: -10px; }
+@mixin hamburger-size($base: $line-height, $line: $hamburger-line-width) {
+  & > .lines {
+    margin-top: calc(#{$base} - 1px);
+    margin-bottom: calc(#{$base} - 2px);
+
+    &, &:after, &:before {
+      @include size($base, $line);
+      border-radius: $line / 2;
+    }
+
+    &:after { top: $base / 4; }
+    &:before { top: -$base / 4; }
+  }
+
+  &:hover > .lines {
+    &:after { top: $base / 2.5; }
+    &:before { top: -$base / 2.5; }
+  }
 }
+
+.hamburger-button { @include hamburger-size; }
 
 /**
 * Hover-to-* effects
@@ -67,7 +76,7 @@ $hamburger-line-width: 3px;
 @mixin hover-to-arrow-rotate($cls, $deg: 360deg) {
   .hamburger-button.hover-to-arrow-#{$cls}:hover > .lines,
   *:hover > .hamburger-button.hover-to-arrow-#{$cls} > .lines {
-    transform: rotate(#{$deg}) scale(0.6);
+    transform: rotate(#{$deg}) scale(0.7);
   }
 }
 

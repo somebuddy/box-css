@@ -19,5 +19,8 @@ $navbar-height: $line-height * 2;
       }
     }
   }
-
+  
+  .menu {
+    @extend .hamburger-button;
+  }
 }

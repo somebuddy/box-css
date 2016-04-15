@@ -3,9 +3,10 @@ $col-width: 1rem !default;
 $navbar-height: $line-height * 2;
 
 .navbar {
-  @include flex-row;
+  @extend .row;
   @include reset-link;
   min-height: $navbar-height;
+  border-width: 0;
 
   > .nav-list {
     @include flex-row;

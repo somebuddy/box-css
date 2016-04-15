@@ -11,8 +11,6 @@ $secondary-opacity: .6;
 
 @mixin row-layout {
   @include flex-row;
-  border-top: $row-border-width solid transparent;
-  border-bottom: $row-border-width solid transparent;
   padding: 0 0 0 $row-padding;
   margin: 0;
   line-height: $line-height;
@@ -91,4 +89,6 @@ $secondary-opacity: .6;
   @include row-components;
   width: 100%;
   min-height: $line-height*2;
+  border-top: $row-border-width solid transparent;
+  border-bottom: $row-border-width solid transparent;
 }

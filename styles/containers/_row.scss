@@ -60,17 +60,23 @@ $secondary-opacity: .6;
 @mixin row-column {
   /* Fixed minimum size without padding */
   @include flex-child-fluid(0, $column-width);
-  flex-grow: 1;
   justify-content: center;
 }
 
 @mixin row-cell {
   /* element that has own padding and zero margin */
   padding: 0 $column-width;
-  margin: 0;
-  margin-left: -$column-width;
-  &:first-child { margin-left: $row-padding; }
-  & + .block { margin-left: $column-width; }
+  &:first-child { margin-left: -$row-child-margin; }
+  &:last-child { margin-right: 0; }
+  & + .cell { margin-left: -$row-child-margin; }
+  & + .spacer { margin-left: -$row-child-margin; }
+}
+
+@mixin row-spacer {
+  /* Add additional 1 column-width space between elements */
+  @include row-column;
+  &:last-child { margin-right: 0; }
+  & + * { margin-left: -$row-child-margin; }
 }
 
 @mixin row-block {
@@ -84,7 +90,8 @@ $secondary-opacity: .6;
   > .row-icon { @include row-marker; }
   > .title, > .label { @include row-text-line; }
   > .title, > .filler { @include row-filler; }
-  > .icon, > .spacer { @include row-column; }
+  > .icon { @include row-column; }
+  > .spacer { @include row-spacer; }
   > .cell, > .toolbar, > nav { @include row-cell; }
   > .block { @include row-block; }
 

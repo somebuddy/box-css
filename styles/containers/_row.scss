@@ -24,8 +24,16 @@ $secondary-opacity: .6;
     &:last-child { margin-right: $row-padding; }
   }
 
-  > .fluid {
-    @include flex-child-fluid($basis: auto);
+  > .fluid { @include flex-child-fluid($basis: auto); }
+
+  > .pull-right {
+    order: 99;
+    margin-left: auto;
+  }
+
+  > .pull-left {
+    order: -99;
+    margin-right: auto;
   }
 }
 
@@ -34,7 +42,7 @@ $secondary-opacity: .6;
 @mixin row-marker {
   /* Rules for first row element (icon, avatar, checkbox etc.) */
   flex-basis: $row-marker-size;
-  order: -1;
+  order: -99;
 }
 
 @mixin row-filler {

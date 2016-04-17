@@ -22,3 +22,31 @@ img, embed, object, video {
 @-o-viewport        { width: device-width; }
 @-webkit-viewport   { width: device-width; }
 @viewport           { width: device-width; }
+
+@mixin reset-button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+
+  &:active, &:focus, &:hover { outline: none; }
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+[role="button"] {
+  @include reset-button;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}

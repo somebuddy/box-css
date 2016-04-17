@@ -113,7 +113,7 @@ $secondary-opacity: .6;
   > .icon { @include row-column; }
   > .spacer { @include row-spacer; }
   > .cell, > .toolbar, > nav { @include row-cell; }
-  > .block { @include row-block; }
+  > .block, > .button { @include row-block; }
   > .splitter { @include row-splitter; }
 
   &.right > .row-icon { order: 999; }

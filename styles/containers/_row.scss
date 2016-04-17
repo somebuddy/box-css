@@ -79,6 +79,26 @@ $secondary-opacity: .6;
   & + * { margin-left: -$row-child-margin; }
 }
 
+@mixin row-splitter {
+  @include flex-child-fixed($basis: 1px);
+  margin: 0 calc(#{$row-child-margin/2} - 1px) 0 0;
+  margin-left: -$row-child-margin/2;
+  align-self: center;
+  height: $line-height;
+  background: rgba(0,0,0,$secondary-opacity/2);
+
+  &.wide {
+    margin: 0 calc(#{$row-child-margin} - 1px) 0 0;
+    margin-left: 0;
+    &:first-child { margin-left: 0; }
+  }
+
+  &:first-child { margin-left: -$row-child-margin/2; }
+  & + .splitter { margin-left: 0; }
+  &.dark  { background-color: rgba(0,0,0,$secondary-opacity/2); }
+  &.light { background-color: rgba(255,255,255,$secondary-opacity/2); }
+}
+
 @mixin row-block {
   /* element with own height */
   align-self: center;
@@ -94,6 +114,7 @@ $secondary-opacity: .6;
   > .spacer { @include row-spacer; }
   > .cell, > .toolbar, > nav { @include row-cell; }
   > .block { @include row-block; }
+  > .splitter { @include row-splitter; }
 
   &.right > .row-icon { order: 999; }
   > .static { opacity: $secondary-opacity; }

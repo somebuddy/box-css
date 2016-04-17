@@ -6,29 +6,71 @@ $disabled-opacity: 0.2 !default;
 
 $button-border-width: 1px !default;
 
-button,
-input[type="button"],
-.button {
+@mixin button-size ($base-x: $column-width, $base-y: $line-height, $border: $button-border-width) {
+  /* Padding/margin and border by base sizes
+    height inner: (content-height) + .4 * $base-y
+    vertical space: (content-height) + $base-y
+    horizontal: (content-width) + 2 * $base-x
+    horizontal space: (content-width + 3 * $base-x
+  */
+  padding: (.2 * $base-y) $base-x;
+  margin: calc(#{.3 * $base-y} - #{$border}) ($base-x/2);
+  border: $border solid;
+}
+
+@mixin button-layout {
+  /* Inner content */
   @include flex-inline-center;
-  @include reset-button;
-  padding: (.2 * $line-height) $column-width;
-  margin: calc(#{.3 * $line-height} - #{$button-border-width}) ($column-width/2);
-  border: $button-border-width solid;
+}
+
+@mixin button-styles {
   border-radius: .25rem;
-  background: rgba(0,0,0,.15);
   font-size: .875rem;
   font-weight: 500;
   cursor: pointer;
-
-  opacity: $secondary-opacity;
-  transition: opacity .3s ease;
-
-  &:hover { opacity: $main-opacity; }
 }
 
+@mixin button-hover {
+  opacity: $secondary-opacity;
+  transition: opacity .3s ease;
+  &:hover { opacity: $main-opacity; }
+  &.disabled,
+  &.disabled:hover {
+    opacity: $disabled-opacity;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-colorize($cls: null, $color: inherit, $bkg: transparentize(white, 0.8), $border: null) {
+  $selector: if($cls, "&." + #{$cls}, "&");
+  #{$selector} {
+    color: $color;
+    background: $bkg;
+    border-color: $border;
+  }
+}
+
+@mixin button-colorize-default($cls: null, $color: black) {
+  @include button-colorize($cls, rgba($color,.8), rgba($color,.2));
+}
+
+@mixin button-default {
+  @include button-layout;
+  @include button-size;
+  @include button-styles;
+  @include button-hover;
+  @include button-colorize-default($color: #555);
+  @include button-colorize-default(white, white);
+  @include button-colorize-default(primary, $color: #2196F3);
+  @include button-colorize-default(success, $color: #4CAF50);
+  @include button-colorize-default(danger, $color: transparentize(#F44336, .1));
+  @include button-colorize-default(transparent, $color: transparent);
+
+}
 
 button,
 input[type="button"],
 .button {
-   border-color: rgba(0,0,0,0.3);
+  @include reset-button;
+  @include button-default;
 }

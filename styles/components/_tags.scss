@@ -1,0 +1,29 @@
+$line-height: 1.5rem !default;
+$tag-base-height: $line-height / 2;
+$column-width: 1rem !default;
+
+.tag {
+  @include flex-inline-center;
+  @include text-ellipsis(nowrap);
+  font-size: $tag-base-height;
+  line-height: $tag-base-height;
+  padding: ($tag-base-height / 3) ($column-width / 2);
+  margin: ($tag-base-height / 6) ($column-width / 2);
+  margin-left: 0;
+  border-radius: 4px;
+  border: 1px solid;
+  @include box_shadow(1);
+
+  color: rgba(0,0,0,0.6);
+
+  &.dark {
+    background-color: rgba(0,0,0,0.6);
+    border-color: rgba(0,0,0,0.5);
+    color: white;
+  }
+}
+
+.tags {
+  @include row-layout;
+  .tags { align-self: center; }
+}

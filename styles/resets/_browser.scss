@@ -23,6 +23,8 @@ img, embed, object, video {
 @-webkit-viewport   { width: device-width; }
 @viewport           { width: device-width; }
 
+
+/* Button styles */
 @mixin reset-button {
   background: none;
   border: none;
@@ -49,4 +51,21 @@ button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
+}
+
+/* Inputs */
+@mixin reset-input {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  border: none;
+  outline: none;
+  background: none;
+  vertical-align: middle;
+}
+
+input,
+textarea {
+  @include reset-input;
 }

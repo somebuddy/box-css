@@ -54,12 +54,11 @@ $secondary-opacity: .6;
 @mixin row-text-line {
   /* One line text in row */
   @include text-ellipsis;
-  font-weight: 400;
 }
 
 @mixin row-column {
   /* Fixed minimum size without padding */
-  @include flex-child-fluid(0, $column-width);
+  @include flex-child-fixed($column-width);
   justify-content: center;
 }
 

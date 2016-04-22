@@ -1,19 +1,16 @@
 $line-height: 1.5rem !default;
-$column-width: 1rem !default;
-$hamburger-line-width: 3px;
-$inactive-opacity: .4;
-$hover-opacity: 1;
+$hamburger-line-width: 3px !default;
+$inactive-opacity: .6 !default;
+$hover-opacity: 1 !default;
 
-.hamburger-button {
-  @include flex-inline;
+/* Layout */
+@mixin hamburger-button-layout {
   @include row-layout;
+  @include flex-inline;
   cursor: pointer;
 
   > .lines {
     position: relative;
-    opacity: $inactive-opacity;
-
-    &, &:after, &:before { transition: all .35s ease; }
 
     &:after, &:before {
       content: '';
@@ -22,8 +19,7 @@ $hover-opacity: 1;
   }
 }
 
-.hamburger-button:hover > .lines { opacity: $hover-opacity; }
-
+/* Size mixins */
 @mixin hamburger-size($base: $line-height, $line: $hamburger-line-width) {
   & > .lines {
     margin-top: calc(#{$base} - 1px);
@@ -37,125 +33,109 @@ $hover-opacity: 1;
     &:after { top: $base / 4; }
     &:before { top: -$base / 4; }
   }
+}
+
+/* Hover effect: default */
+@mixin hamburger-hover {
+  transition: all .35s ease;
+
+  & > .lines {
+    opacity: $inactive-opacity;
+    &, &:after, &:before { transition: all .35s ease; }
+  }
 
   &:hover > .lines {
-    &:after { top: $base / 2.5; }
-    &:before { top: -$base / 2.5; }
+    opacity: $hover-opacity;
+    &:after { transform: translateY(125%); }
+    &:before { transform: translateY(-125%); }
   }
 }
 
-.hamburger-button { @include hamburger-size; }
+@mixin hamburger-button-colorize($cls: null, $color: white) {
+  $selector: if($cls, #{"&." + $cls}, "&");
+  #{$selector} {
+    color: transparentize($color, 0.5);
+    &:hover { color: $color; }
 
-/**
-* Hover-to-* effects
-**/
-
-.hamburger-button:hover,
-*:hover > .hamburger-button.hover-to-arrow-down {
-  &[class^="hover-to-arrow-"], &[class*=" hover-to-arrow-"] {
-    & > .lines {
-      &:after, &:before {
-        transform-origin: 2px center;
-        width: 60%;
-        transition: all .35s ease;
-      }
-
-      &:after {
-        top: 1px;
-        transform: rotate(35deg);
-      }
-
-      &:before {
-        top: -1px;
-        transform: rotate(-35deg);
-      }
+    > .lines {
+      &, &:after, &:before { background-color: $color; }
     }
   }
 }
 
+/* Hamburger button CSS class */
+.hamburger-button {
+  @include hamburger-button-layout;
+  @include hamburger-size;
+  @include hamburger-hover;
+
+  @include hamburger-button-colorize;
+  @include hamburger-button-colorize(black, black);
+  @include hamburger-button-colorize(red, #d50000);
+  @include hamburger-button-colorize(white, white);
+}
+
+
+/**
+* Additional Hover-to-* effects
+**/
+
+
+/* Arrows */
+@mixin hamburger-arrow($arrow-deg: 35deg) {
+  & > .lines {
+    &:after, &:before {
+      transform-origin: 2px center;
+      width: 60%;
+    }
+
+    &:after {
+      top: 1px;
+      transform: rotate(#{$arrow-deg});
+    }
+
+    &:before {
+      top: -1px;
+      transform: rotate(#{-$arrow-deg});
+    }
+  }
+}
+
+.hamburger-button:hover {
+  &[class^="hover-to-arrow-"], &[class*=" hover-to-arrow-"] {
+    @include hamburger-arrow(35deg);
+  }
+}
+
 @mixin hover-to-arrow-rotate($cls, $deg: 360deg) {
-  .hamburger-button.hover-to-arrow-#{$cls}:hover > .lines,
-  *:hover > .hamburger-button.hover-to-arrow-#{$cls} > .lines {
+  .hamburger-button.hover-to-arrow-#{$cls}:hover > .lines {
     transform: rotate(#{$deg}) scale(0.7);
   }
 }
 
-/* Arrow down */
 @include hover-to-arrow-rotate(down, 270deg);
-
-/* Arrow up */
 @include hover-to-arrow-rotate(up, -270deg);
-
-/* Arrow left */
 @include hover-to-arrow-rotate(left);
-
-/* Arrow right */
 @include hover-to-arrow-rotate(right, -180deg);
 
 /* Close button */
 .hamburger-button.hover-to-close > .lines {
-  transition: background .25s step-start .25s;
+  transition: background .25s step-start .25s, opacity .5s ease;
 
   &:after, &:before {
+    transform-origin: center center;
     transition: top .25s ease .25s, transform .25s ease;
   }
 }
 
-.hamburger-button.hover-to-close:hover > .lines,
-*:hover > .hamburger-button.hover-to-close > .lines {
+.hamburger-button.hover-to-close:hover > .lines {
   background: transparent;
-  transition: background .25s step-start .25s;
 
   &:after, &:before {
     top: 0;
-    transform-origin: center center;
     transition: top .25s ease, transform .25s ease .25s;
   }
 
   &:after { transform: rotate(45deg); }
   &:before { transform: rotate(-45deg); }
 }
-
-/* Expanded state arrow */
-.expanded > .hamburger-button > .lines {
-  opacity: 1;
-  transform: rotate(90deg) scale(0.6);
-  transition: all .35s ease;
-
-  &:after, &:before {
-    transform-origin: 2px center;
-    width: 60%;
-    transition: all .35s ease;
-  }
-
-  &:after {
-    transform: rotate(35deg);
-    top: 1px;
-  }
-
-  &:before {
-    transform: rotate(-35deg);
-    top: -1px;
-  }
-}
-
-@mixin hamburger-button-colorize($cls: null, $color: white) {
-  $selector: if($cls, #{".hamburger-button." + $cls}, ".hamburger-button");
-  #{$selector} {
-    color: transparentize($color, 0.5);
-
-    &:hover {
-      color: $color;
-    }
-
-    > .lines {
-      &, &:after, &:before {
-        background-color: $color;
-      }
-    }
-  }
-}
-
-@include hamburger-button-colorize;
-@include hamburger-button-colorize(black, black);
-@include hamburger-button-colorize(red, #d50000);

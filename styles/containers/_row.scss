@@ -29,6 +29,10 @@ $secondary-opacity: .6;
   > .pull-right {
     order: 99;
     margin-left: auto;
+
+    & ~ .pull-right {
+      margin-left: 0;
+    }
   }
 
   > .pull-left {

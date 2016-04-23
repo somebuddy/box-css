@@ -8,16 +8,59 @@
   </header>
   <section class="content">
     <article class="doc">
-      <header><h3>Input</h3></header>
+      <header><h3>Navigation Bar</h3></header>
       <section class="content">
-        <h5>Input</h5>
-        <section class="example" style="align-items: center; align-content: center; min-height: 3rem">
-          <input placeholder="Default input styles" />
+        <h5>Default</h5>
+        <section class="example">
+          <div class="navbar">
+            <div class="brand">
+              <div class="icon"><i class="fa fa-th"></i></div>
+              <div class="title">Example</div>
+            </div>
+            <ul class="nav-list pull-right">
+              <li><a href="#">Route 1</a></li>
+              <li class="active"><a href="#">Active Route</a></li>
+              <li><a href="#">Route 2</a></li>
+              <li class="Disabled"><a href="#">Disabled route</a></li>
+              <li><a href="#">Route 2</a></li>
+            </ul>
+            <div class="toggle-button pull-right"><i class="fa fa-cog"></i></div>
+          </div>
         </section>
-        <h5>Textarea</h5>
-        <section class="example" style="align-items: center; align-content: center; min-height: 3rem">
-          <textarea placeholder="Default input styles"></textarea>
-        </section>
+        <h5>Collapsed menu</h5>
+        <div class="example">
+          <div class="navbar" style="background-color: #556">
+            <div class="brand">
+              <div class="icon"><i class="fa fa-th"></i></div>
+              <div class="title">Example</div>
+            </div>
+            <ul class="nav-list">
+              <li><a href="#">On all devices</a></li>
+              <li class="hamburger-button expand-on-tablet"><div class="lines"></div></li>
+              <li><a href="#">Route 1</a></li>
+              <li><a href="#">Route 2</a></li>
+              <li class="hamburger-button expand-on-laptop"><div class="lines"></div></li>
+              <li><a href="#">Route 3</a></li>
+              <li><a href="#">Route 4</a></li>
+              <li class="hamburger-button expand-on-hd"><div class="lines"></div></li>
+              <li><a href="#">Route 5</a></li>
+              <li><a href="#">Route 6</a></li>
+            </ul>
+            <div class="toggle-button"><i class="fa fa-cog"></i></div>
+          </div>
+        </div>
+        <h5>With input</h5>
+        <div class="example">
+          <div class="navbar" style="background-color: #DDE">
+            <div class="brand">
+              <div class="icon"><i class="fa fa-th"></i></div>
+              <div class="title">Example</div>
+            </div>
+            <input type="search" placeholder="Search">
+            <input type="button" value="Submit">
+            <div class="toggle-button"><i class="fa fa-cog"></i></div>
+          </div>
+        </div>
       </section>
       <header><h3>Tags</h3></header>
       <section class="content">

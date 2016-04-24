@@ -1,6 +1,6 @@
 $line-height: 1.5rem !default;
 $col-width: 1rem !default;
-$navbar-height: $line-height * 2;
+$navbar-height: $line-height * 3;
 $disabled-opacity: .4 !default;
 $secondary-opacity: .6 !default;
 $hover-opacity: 1 !default;
@@ -13,7 +13,8 @@ $hover-link-color: white !default;
   min-height: $navbar-height;
   border-width: 0;
   font-weight: 500;
-  min-height: 3 * $line-height;
+  margin-bottom: $line-height;
+
 
   > .brand {
     margin-left: 0;
@@ -35,7 +36,6 @@ $hover-link-color: white !default;
         }
 
         &.active {
-          background-color: rgba(255,255,255,.1);
           text-shadow: bottom-shadow(1), top-shadow(1);
           border-bottom: 1px solid;
         }
@@ -58,12 +58,24 @@ $hover-link-color: white !default;
   }
 }
 
-.navbar {
-  background: transparent;
-  color: inherit;
+@mixin navbar-colorize($cls: null, $bkg: transparent, $clr: inherit) {
+  $selector: if($cls, #{"&." + $cls}, "&");
+  #{$selector} {
+    background: $bkg;
+    color: $clr;
+
+    @if type-of($clr) == color {
+      > ul.nav-list li:not(.disabled).active {
+        background-color: rgba($clr,.1);
+      }
+    }
+  }
 }
 
-.navbar.dark {
-  background: #333;
-  color: white;
+.navbar {
+  @include navbar-colorize;
+  @include navbar-colorize(light, $clr: #111);
+  @include navbar-colorize(dark, $clr: white);
+  @include navbar-colorize(white, white, #111);
+  @include navbar-colorize(dark-gray, #333, white);
 }

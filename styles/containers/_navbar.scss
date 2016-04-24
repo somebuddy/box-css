@@ -1,27 +1,54 @@
 $line-height: 1.5rem !default;
 $col-width: 1rem !default;
 $navbar-height: $line-height * 2;
+$disabled-opacity: .4 !default;
+$secondary-opacity: .6 !default;
+$hover-opacity: 1 !default;
+$active-route-color: white !default;
+$hover-link-color: white !default;
 
 .navbar {
-  @extend .row;
   @include reset-link;
+  @extend .row;
   min-height: $navbar-height;
   border-width: 0;
+  font-weight: 500;
+  min-height: 3 * $line-height;
 
   > .brand {
     margin-left: 0;
   }
 
-  > .nav-list {
+  > ul.nav-list {
     @include reset-list;
     @include row-layout;
 
-    a {
-      @include flex-center;
-      padding: 0 $col-width;
+    > li {
+      @include row-text-line;
+      @include flex-row;
+      opacity: $secondary-opacity;
+      transition: all .3s ease;
 
-      &:hover {
-        background-color: rgba(255,255,255,.1);
+      &:not(.disabled) {
+        &:hover, &.active {
+          opacity: $hover-opacity;
+        }
+
+        &.active {
+          background-color: rgba(255,255,255,.1);
+          text-shadow: bottom-shadow(1), top-shadow(1);
+          border-bottom: 1px solid;
+        }
+      }
+
+      &.disabled {
+        opacity: $disabled-opacity;
+      }
+
+      > a {
+        @include flex-center;
+        padding: 0 $col-width;
+        margin: -2px 0;
       }
     }
   }
@@ -29,4 +56,14 @@ $navbar-height: $line-height * 2;
   .menu {
     @extend .hamburger-button;
   }
+}
+
+.navbar {
+  background: transparent;
+  color: inherit;
+}
+
+.navbar.dark {
+  background: #333;
+  color: white;
 }

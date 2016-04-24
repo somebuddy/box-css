@@ -59,6 +59,7 @@ $footer-font-size: 0.75rem;
     > .content, .page-content,
     > footer, .page-footer {
       @include flex-child-fluid($basis: 100%);
+      overflow-x: hidden;
     }
 
     > aside, .page-aside {

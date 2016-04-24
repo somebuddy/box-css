@@ -106,20 +106,32 @@
         </section>
         <h5>Collapsed menu</h5>
         <div class="example">
-          <div class="navbar" style="background-color: #556">
+          <div class="navbar light" style="background-color: #B2FF59">
             <div class="brand">
               <div class="icon"><i class="fa fa-th"></i></div>
               <div class="title">Example</div>
             </div>
             <ul class="nav-list">
               <li><a href="#">On all devices</a></li>
-              <li class="menu expand-on-tablet"><div class="lines"></div></li>
+              <li class="collapse-button expand-on-tablet">
+                <div class="hamburger-button">
+                  <div class="lines"></div>
+                </div>
+              </li>
               <li><a href="#">Route 1</a></li>
               <li><a href="#">Route 2</a></li>
-              <li class="menu expand-on-laptop"><div class="lines"></div></li>
+              <li class="collapse-button expand-on-laptop">
+                <div class="hamburger-button">
+                  <div class="lines"></div>
+                </div>
+              </li>
               <li><a href="#">Route 3</a></li>
               <li><a href="#">Route 4</a></li>
-              <li class="menu expand-on-hd"><div class="lines"></div></li>
+              <li class="collapse-button expand-on-hd">
+                <div class="hamburger-button">
+                  <div class="lines"></div>
+                </div>
+              </li>
               <li><a href="#">Route 5</a></li>
               <li><a href="#">Route 6</a></li>
             </ul>
@@ -134,7 +146,7 @@
               <div class="title">Example</div>
             </div>
             <input type="search" placeholder="Search">
-            <input type="button" value="Submit">
+            <input type="button" class="button" value="Submit">
             <div class="toggle-button"><i class="fa fa-cog"></i></div>
           </div>
         </div>

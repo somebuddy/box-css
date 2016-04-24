@@ -6,11 +6,15 @@
       </div>
       <div class="name">Box UI</div>
     </a>
-    <div class="nav-list collapsed">
-      <a [routerLink]="['Docs']">Docs</a>
-      <a [routerLink]="['Examples']">Examples</a>
-      <div class="menu hover-to-arrow-down"><div class="lines"></div></div>
-    </div>
+    <ul class="nav-list collapsed">
+      <li><a [routerLink]="['Docs']">Docs</a></li>
+      <li><a [routerLink]="['Examples']">Examples</a></li>
+      <li class="collapse-button">
+        <div class="hamburger-button  hover-to-arrow-down">
+          <div class="lines"></div>
+        </div>
+      </li>
+    </ul>
   </nav>
   <header class="page-header">
     Box UI Documentation

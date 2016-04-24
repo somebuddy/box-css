@@ -1,3 +1,5 @@
+@import "../components/hamburger";
+
 $line-height: 1.5rem !default;
 $col-width: 1rem !default;
 $navbar-height: $line-height * 3;
@@ -50,11 +52,11 @@ $hover-link-color: white !default;
         padding: 0 $col-width;
         margin: -2px 0;
       }
-    }
-  }
 
-  .menu {
-    @extend .hamburger-button;
+      &.collapse-button {
+        @include flex-align-middle;
+      }
+    }
   }
 }
 
@@ -67,6 +69,10 @@ $hover-link-color: white !default;
     @if type-of($clr) == color {
       > ul.nav-list li:not(.disabled).active {
         background-color: rgba($clr,.1);
+      }
+
+      > ul.nav-list li.collapse-button > .hamburger-button {
+        @include hamburger-button-colorize($color: $clr);
       }
     }
   }

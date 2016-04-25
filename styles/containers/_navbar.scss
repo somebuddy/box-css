@@ -53,8 +53,40 @@ $hover-link-color: white !default;
         margin: -2px 0;
       }
 
+      @mixin expand-menu-media-query ($width) {
+        & ~ li {  display: none;  }
+
+        @media (min-width: $width) {
+          display: none; // hide it-self
+          & ~ li { display: flex; } // display all afters
+        }
+      }
+
       &.collapse-button {
         @include flex-align-middle;
+        & ~ li { display: none; }
+
+        &.expand-on-tablet {
+          @include expand-menu-media-query(768px);
+        }
+
+        &.expand-on-desktop {
+          @include expand-menu-media-query(1024px);
+        }
+
+        &.expand-on-laptop {
+          @include expand-menu-media-query(1320px);
+        }
+
+        &.expand-on-hd {
+          @include expand-menu-media-query(1920px);
+        }
+
+        &:hover {
+          & ~ li {
+            display: flex;
+          }
+        }
       }
     }
   }

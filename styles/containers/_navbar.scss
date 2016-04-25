@@ -16,7 +16,8 @@ $hover-link-color: white !default;
   border-width: 0;
   font-weight: 500;
   margin-bottom: $line-height;
-
+  flex-wrap: wrap;
+  padding: 0;
 
   > .brand {
     margin-left: 0;
@@ -52,43 +53,58 @@ $hover-link-color: white !default;
         padding: 0 $col-width;
         margin: -2px 0;
       }
+    }
+  }
 
-      @mixin expand-menu-media-query ($width) {
-        & ~ li {  display: none;  }
+  @mixin expand-menu-media-query ($width) {
+    @media (min-width: $width) {
+      display: none;
 
-        @media (min-width: $width) {
-          display: none; // hide it-self
-          & ~ li { display: flex; } // display all afters
-        }
+      & + ul.nav-list {
+        flex: 0 0 auto;
+        @include flex-row;
+        border: none;
+        box-shadow: none;
+        padding-bottom: 0;
+        margin-left: 0;
+        background: transparent;
+        color: inherit;
       }
+    }
+  }
 
-      &.collapse-button {
-        @include flex-align-middle;
-        & ~ li { display: none; }
+  .collapse-button {
+    @include flex-align-middle;
+    min-height: $navbar-height;
 
-        &.expand-on-tablet {
-          @include expand-menu-media-query(768px);
-        }
+    & ~ ul.nav-list {
+      display: none;
+    }
 
-        &.expand-on-desktop {
-          @include expand-menu-media-query(1024px);
-        }
+    &:hover ~ ul.nav-list {
+      flex: 0 0 100%;
+      @include flex-column;
+      margin-left: -$row-padding;
+      background: rgba(0, 0, 0, .4);
+      color: white;
+      border-bottom: 1px solid rgba(white, .3);
+      box-shadow: top-shadow(3), bottom-shadow(3);
+      padding-bottom: $line-height;
 
-        &.expand-on-laptop {
-          @include expand-menu-media-query(1320px);
-        }
+      > li {
+        min-height: 2 * $line-height;
 
-        &.expand-on-hd {
-          @include expand-menu-media-query(1920px);
-        }
-
-        &:hover {
-          & ~ li {
-            display: flex;
-          }
+        &.active {
+          border-left: 1px solid;
+          border-bottom: 0;
         }
       }
     }
+
+    &.collapse-on-mobile { @include expand-menu-media-query(768px); }
+    &.collapse-on-tablet { @include expand-menu-media-query(1024px); }
+    &.collapse-on-desktop { @include expand-menu-media-query(1320px); }
+    &.collapse-on-laptop { @include expand-menu-media-query(1920px); }
   }
 }
 
@@ -103,7 +119,7 @@ $hover-link-color: white !default;
         background-color: rgba($clr,.1);
       }
 
-      > ul.nav-list li.collapse-button > .hamburger-button {
+      .collapse-button > .hamburger-button {
         @include hamburger-button-colorize($color: $clr);
       }
     }

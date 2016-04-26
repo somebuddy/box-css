@@ -5,7 +5,7 @@
     ng.core.Component({
       selector: 'box-ui-app',
       templateUrl: 'app.component.html',
-      directives: [ng.router.ROUTER_DIRECTIVES]
+      directives: [ng.router.ROUTER_DIRECTIVES, app.CollapseButtonDirective]
     })
     .Class({
       constructor: [ng.router.Router, function (router) {

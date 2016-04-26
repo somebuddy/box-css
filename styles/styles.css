@@ -1,18 +1,5 @@
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css";
 
-.page > nav {
-  background: #555;
-  color: white;
-}
-
-nav .brand {
-  color: #000;
-}
-
-nav .brand:hover {
-  color: white;
-}
-
 .page > header, .page .page-header {
   background: #d50000;
   color: white;

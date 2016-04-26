@@ -33,6 +33,7 @@ $hover-link-color: white !default;
 
 @mixin navbar-list-row {
   flex: 0 0 auto;
+  order: initial;
   @include flex-row;
   border: none;
   box-shadow: none;
@@ -40,6 +41,15 @@ $hover-link-color: white !default;
   margin-left: 0;
   background: transparent;
   color: inherit;
+
+  > li {
+    margin-top: 0;
+
+    &.active {
+      border-left: 0;
+      border-bottom: 1px solid;
+    }
+  }
 }
 
 .navbar {
@@ -106,38 +116,44 @@ $hover-link-color: white !default;
     }
   }
 
-  .collapse-button {
-    @include flex-align-middle;
-    min-height: $navbar-height;
+  @mixin nav-list-column-hidden-state {
+    min-height: 0;
+    padding-bottom: 0;
+    border-bottom-width: 0;
+    transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
+    transition-delay: .5s;
 
+    > li {
+      margin-top: -2 * $line-height;
+      transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895), opacity .3s ease;
+      transition-delay: .5s;
+    }
+  }
+
+  @mixin nav-list-column-open-state {
+    min-height: $navbar-height;
+    padding-bottom: $line-height;
+    border-bottom-width: 2px;
+    transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
+
+    > li {
+      margin-top: 0;
+      transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895);
+    }
+  }
+
+  .collapse-button {
     & ~ ul.nav-list {
       @include navbar-list-column;
-
-      min-height: 0;
-      padding-bottom: 0;
-      border-bottom-width: 0;
-      transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
-
-      > li {
-        margin-top: -2 * $line-height;
-        transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895);
-      }
+      @include nav-list-column-hidden-state;
     }
 
-    &:hover, &.expand {
-      z-index: 10;
+    &:hover, &.expand { z-index: 10; }
 
-      & ~ ul.nav-list {
-        min-height: $navbar-height;
-        padding-bottom: $line-height;
-        border-bottom-width: 2px;
-        transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
-
-        > li {
-          margin-top: 0;
-          transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895);
-        }
-      }
+    &:hover ~ ul.nav-list,
+    &.expand ~ ul.nav-list,
+    & ~ ul.nav-list:hover {
+      @include nav-list-column-open-state;
     }
 
     &:hover > .hamburger-button,
@@ -155,31 +171,6 @@ $hover-link-color: white !default;
     &.collapse-on-tablet { @include expand-menu-media-query(1024px); }
     &.collapse-on-desktop { @include expand-menu-media-query(1320px); }
     &.collapse-on-laptop { @include expand-menu-media-query(1920px); }
-  }
-}
-
-@keyframes navlist-dropdown {
-  0% {
-    min-height: 0;
-    padding-bottom: 0;
-  }
-  100% {
-    min-height: $navbar-height;
-    padding-bottom: $line-height;
-  }
-}
-
-@keyframes navlist-items-fade-in {
-  0% {
-    opacity: 0;
-    margin-top: -6rem;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    margin-top: 0;
   }
 }
 

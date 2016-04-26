@@ -11,12 +11,14 @@ $hover-link-color: white !default;
 
 @mixin navbar-list-column {
   flex: 1 1 100%;
+  order: 999;
   @include flex-column;
-  background: rgba(0, 0, 0, .4);
-  color: white;
+  overflow: hidden;
+  z-index: 1;
   border-bottom: 2px solid rgba(white, .3);
   box-shadow: top-shadow(3), bottom-shadow(3);
-  padding-bottom: $line-height;
+  background: rgba(0, 0, 0, .4);
+  color: white;
   margin-left: -$row-padding;
 
   > li {
@@ -109,21 +111,31 @@ $hover-link-color: white !default;
     min-height: $navbar-height;
 
     & ~ ul.nav-list {
-      display: none;
+      @include navbar-list-column;
+
+      min-height: 0;
+      padding-bottom: 0;
+      border-bottom-width: 0;
+      transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
+
+      > li {
+        margin-top: -2 * $line-height;
+        transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895);
+      }
     }
 
     &:hover, &.expand {
       z-index: 10;
 
       & ~ ul.nav-list {
-        z-index: 1;
-        order: 999;
-        overflow: hidden;
-        @include navbar-list-column;
-        animation: navlist-dropdown .2s ease-out;
+        min-height: $navbar-height;
+        padding-bottom: $line-height;
+        border-bottom-width: 2px;
+        transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
 
         > li {
-          animation: navlist-items-fade-in .5s ease;
+          margin-top: 0;
+          transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895);
         }
       }
     }

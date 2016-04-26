@@ -9,6 +9,37 @@ $hover-opacity: 1 !default;
 $active-route-color: white !default;
 $hover-link-color: white !default;
 
+@mixin navbar-list-column {
+  flex: 1 1 100%;
+  @include flex-column;
+  background: rgba(0, 0, 0, .4);
+  color: white;
+  border-bottom: 2px solid rgba(white, .3);
+  box-shadow: top-shadow(3), bottom-shadow(3);
+  padding-bottom: $line-height;
+  margin-left: -$row-padding;
+
+  > li {
+    min-height: 2 * $line-height;
+
+    &.active {
+      border-left: 1px solid;
+      border-bottom: 0;
+    }
+  }
+}
+
+@mixin navbar-list-row {
+  flex: 0 0 auto;
+  @include flex-row;
+  border: none;
+  box-shadow: none;
+  padding-bottom: 0;
+  margin-left: 0;
+  background: transparent;
+  color: inherit;
+}
+
 .navbar {
   @include reset-link;
   @extend .row;
@@ -17,10 +48,17 @@ $hover-link-color: white !default;
   font-weight: 500;
   margin-bottom: $line-height;
   flex-wrap: wrap;
-  padding: 0;
+
+  > * {
+    min-height: $navbar-height;
+  }
 
   > .brand {
     margin-left: 0;
+  }
+
+  > .button {
+    min-height: auto;
   }
 
   > ul.nav-list {
@@ -61,14 +99,7 @@ $hover-link-color: white !default;
       display: none;
 
       & + ul.nav-list {
-        flex: 0 0 auto;
-        @include flex-row;
-        border: none;
-        box-shadow: none;
-        padding-bottom: 0;
-        margin-left: 0;
-        background: transparent;
-        color: inherit;
+        @include navbar-list-row;
       }
     }
   }
@@ -81,24 +112,10 @@ $hover-link-color: white !default;
       display: none;
     }
 
-    &:hover ~ ul.nav-list {
-      flex: 0 0 100%;
-      @include flex-column;
-      margin-left: -$row-padding;
-      background: rgba(0, 0, 0, .4);
-      color: white;
-      border-bottom: 1px solid rgba(white, .3);
-      box-shadow: top-shadow(3), bottom-shadow(3);
-      padding-bottom: $line-height;
-
-      > li {
-        min-height: 2 * $line-height;
-
-        &.active {
-          border-left: 1px solid;
-          border-bottom: 0;
-        }
-      }
+    &:hover ~ ul.nav-list,
+    &.expanded ~ ul.nav-list {
+      @include navbar-list-column;
+      order: 999;
     }
 
     &.collapse-on-mobile { @include expand-menu-media-query(768px); }

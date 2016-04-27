@@ -52,7 +52,7 @@ $hover-opacity: 1 !default;
 }
 
 @mixin hamburger-button-colorize($cls: null, $color: white) {
-  $selector: if($cls, #{"&." + $cls}, "&");
+  $selector: if($cls, "&." + $cls, "&");
   #{$selector} {
     color: transparentize($color, 0.5);
     &:hover { color: $color; }

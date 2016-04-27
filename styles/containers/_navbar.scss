@@ -18,7 +18,6 @@ $hover-link-color: white !default;
   font-weight: 500;
   flex-wrap: wrap;
 
-
   > .brand { margin-left: 0; }
   > .button { min-height: auto; }
 
@@ -154,6 +153,7 @@ ul.nav-list {
 
   overflow: hidden;
   margin-left: -$row-padding;
+  margin-right: 0;
 
   border-bottom: 2px solid rgba(white, .3);
   box-shadow: top-shadow(3), bottom-shadow(3);
@@ -204,7 +204,7 @@ ul.nav-list {
 */
 
 @mixin navbar-colorize($cls: null, $bkg: transparent, $clr: inherit) {
-  $selector: if($cls, #{"&." + $cls}, "&");
+  $selector: if($cls, "&." + $cls, "&");
   #{$selector} {
     background: $bkg;
     color: $clr;

@@ -21,7 +21,10 @@ $footer-font-size: 0.75rem;
     @include page-block-element;
   }
 
-  > nav { order: -99; }
+  > nav {
+    @include flex-child-fixed;
+    order: -99;
+  }
 
   > header, .page-header { order: -98; }
 

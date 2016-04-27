@@ -1,7 +1,7 @@
 @import "../components/hamburger";
 
 $line-height: 1.5rem !default;
-$col-width: 1rem !default;
+$column-width: 1rem !default;
 $navbar-height: $line-height * 3;
 $disabled-opacity: .4 !default;
 $secondary-opacity: .6 !default;
@@ -9,32 +9,90 @@ $hover-opacity: 1 !default;
 $active-route-color: white !default;
 $hover-link-color: white !default;
 
-@mixin navbar-list-column {
-  flex: 1 1 100%;
-  order: 999;
-  @include flex-column;
-  overflow: hidden;
-  z-index: 1;
-  border-bottom: 2px solid rgba(white, .3);
-  box-shadow: top-shadow(3), bottom-shadow(3);
-  background: rgba(0, 0, 0, .4);
-  color: white;
-  margin-left: -$row-padding;
+.navbar {
+  @include reset-link;
+  @extend .row;
+  min-height: $navbar-height;
+  margin-bottom: $line-height;
+  border-width: 0;
+  font-weight: 500;
+  flex-wrap: wrap;
+
+
+  > .brand { margin-left: 0; }
+  > .button { min-height: auto; }
+
+  > .nav-list,
+  > .collapse-button,
+  > .row-button {
+    min-height: $navbar-height;
+  }
+}
+
+
+/* Nav-list
+** List of links
+*/
+
+ul.nav-list {
+  @include reset-list;
+  @include row-layout;
 
   > li {
-    min-height: 2 * $line-height;
+    @include flex-row;
+    position: relative;
+    opacity: $secondary-opacity;
+    transition: all .3s ease;
 
-    &.active {
-      border-left: 1px solid;
-      border-bottom: 0;
+    &:not(.disabled) {
+      &:hover, &.active {
+        opacity: $hover-opacity;
+      }
+
+      &.active {
+        text-shadow: bottom-shadow(1), top-shadow(1);
+        border-bottom: 1px solid;
+      }
+    }
+
+    &.disabled {
+      opacity: $disabled-opacity;
+    }
+
+    > a {
+      @include row-text-line;
+      @include flex-center;
+      padding: 0 $column-width;
+      margin: -2px 0;
+    }
+
+    ul.nav-list {
+      @include reset-list;
+      @include absolute($top: 100%, $left: 0)
+      display: none;
+    }
+
+    &:hover {
+      ul.nav-list {
+        @include column-layout;
+        padding: $line-height/2 $column-width;
+        box-shadow: top-shadow(3), bottom-shadow(3);
+      }
     }
   }
 }
 
+/*
+** Collapse button behaviour
+*/
+
 @mixin navbar-list-row {
   flex: 0 0 auto;
   order: initial;
-  @include flex-row;
+  @include flex-container($direction: row);
+
+  // reset dropdown list styles
+  overflow: visible;
   border: none;
   box-shadow: none;
   padding-bottom: 0;
@@ -52,128 +110,98 @@ $hover-link-color: white !default;
   }
 }
 
-.navbar {
-  @include reset-link;
-  @extend .row;
-  min-height: $navbar-height;
-  border-width: 0;
-  font-weight: 500;
-  margin-bottom: $line-height;
-  flex-wrap: wrap;
-
-  > * {
-    min-height: $navbar-height;
-  }
-
-  > .brand {
-    margin-left: 0;
-  }
-
-  > .button {
-    min-height: auto;
-  }
-
-  > ul.nav-list {
-    @include reset-list;
-    @include row-layout;
-
-    > li {
-      @include row-text-line;
-      @include flex-row;
-      opacity: $secondary-opacity;
-      transition: all .3s ease;
-
-      &:not(.disabled) {
-        &:hover, &.active {
-          opacity: $hover-opacity;
-        }
-
-        &.active {
-          text-shadow: bottom-shadow(1), top-shadow(1);
-          border-bottom: 1px solid;
-        }
-      }
-
-      &.disabled {
-        opacity: $disabled-opacity;
-      }
-
-      > a {
-        @include flex-center;
-        padding: 0 $col-width;
-        margin: -2px 0;
-      }
-    }
-  }
-
-  @mixin expand-menu-media-query ($width) {
-    @media (min-width: $width) {
-      display: none;
-
-      & + ul.nav-list {
-        @include navbar-list-row;
-      }
-    }
-  }
-
-  @mixin nav-list-column-hidden-state {
-    min-height: 0;
-    padding-bottom: 0;
-    border-bottom-width: 0;
-    transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
-    transition-delay: .5s;
-
-    > li {
-      margin-top: -2 * $line-height;
-      transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895), opacity .3s ease;
-      transition-delay: .5s;
-    }
-  }
-
-  @mixin nav-list-column-open-state {
-    min-height: $navbar-height;
-    padding-bottom: $line-height;
-    border-bottom-width: 2px;
-    transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
-
-    > li {
-      margin-top: 0;
-      transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895);
-    }
-  }
-
-  .collapse-button {
-    & ~ ul.nav-list {
-      @include navbar-list-column;
-      @include nav-list-column-hidden-state;
-    }
-
-    // &:hover,
-    &.expand { z-index: 10; }
-
-    // &:hover ~ ul.nav-list,
-    &.expand ~ ul.nav-list,
-    & ~ ul.nav-list:hover {
-      @include nav-list-column-open-state;
-    }
-
-    &:hover > .hamburger-button,
-    &.expand > .hamburger-button {
-      @include hamburger-arrow(35deg);
-
-      > .lines { transform: rotate(270deg) scale(0.7); }
-    }
-
-    &.expand:hover > .hamburger-button {
-      > .lines { transform: rotate(-270deg) scale(0.7); }
-    }
-
-    &.collapse-on-mobile { @include expand-menu-media-query(768px); }
-    &.collapse-on-tablet { @include expand-menu-media-query(1024px); }
-    &.collapse-on-desktop { @include expand-menu-media-query(1320px); }
-    &.collapse-on-laptop { @include expand-menu-media-query(1920px); }
+// Media queries for row state
+@mixin expand-menu-media-query ($width) {
+  @media (min-width: $width) {
+    display: none;
+    & + ul.nav-list { @include navbar-list-row; }
   }
 }
+
+// Dropdown animations states
+// Initial
+@mixin dropdown-initial {
+  min-height: 0;
+  padding-bottom: 0;
+  border-bottom-width: 0;
+  transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
+  transition-delay: .5s;
+
+  > * {
+    margin-top: -$navbar-height;
+    transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895), opacity .3s ease;
+    transition-delay: .5s;
+  }
+}
+
+// Expanded
+@mixin dropdown-final {
+  min-height: $navbar-height;
+  padding-bottom: $line-height;
+  border-bottom-width: 2px;
+  transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
+
+  > * {
+    margin-top: 0;
+    transition: margin-top .5s cubic-bezier(0.285, 1.540, 0.780, 0.895);
+  }
+}
+
+@mixin navbar-list-column {
+  flex: 1 1 100%;
+  order: 999;
+  @include flex-container($direction: column);
+
+  overflow: hidden;
+  margin-left: -$row-padding;
+
+  border-bottom: 2px solid rgba(white, .3);
+  box-shadow: top-shadow(3), bottom-shadow(3);
+  background: rgba(0, 0, 0, .4);
+  color: white;
+
+  > li {
+    min-height: 2 * $line-height;
+
+    &.active {
+      border-left: 1px solid;
+      border-bottom: 0;
+    }
+  }
+}
+
+.navbar > .collapse-button {
+  & ~ ul.nav-list {
+    @include navbar-list-column;
+    @include dropdown-initial;
+  }
+
+  // &:hover ~ ul.nav-list,
+  &.expand ~ ul.nav-list,
+  & ~ ul.nav-list:hover {
+    @include dropdown-final;
+  }
+
+  &:hover > .hamburger-button,
+  &.expand > .hamburger-button {
+    @include hamburger-arrow(35deg);
+
+    > .lines { transform: rotate(270deg) scale(0.7); }
+  }
+
+  &.expand:hover > .hamburger-button {
+    > .lines { transform: rotate(-270deg) scale(0.7); }
+  }
+
+  &.collapse-on-mobile { @include expand-menu-media-query(768px); }
+  &.collapse-on-tablet { @include expand-menu-media-query(1024px); }
+  &.collapse-on-desktop { @include expand-menu-media-query(1320px); }
+  &.collapse-on-laptop { @include expand-menu-media-query(1920px); }
+}
+
+/**
+*   Colorization
+*/
 
 @mixin navbar-colorize($cls: null, $bkg: transparent, $clr: inherit) {
   $selector: if($cls, #{"&." + $cls}, "&");

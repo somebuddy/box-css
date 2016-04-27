@@ -57,7 +57,7 @@ $secondary-opacity: .6;
 
 @mixin row-text-line {
   /* One line text in row */
-  @include text-ellipsis;
+  @include text-ellipsis(nowrap);
 }
 
 @mixin row-column {

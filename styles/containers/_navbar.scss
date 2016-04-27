@@ -91,6 +91,7 @@ ul.nav-list {
   @include flex-container($direction: row);
 
   // reset dropdown list styles
+  min-height: $navbar-height;
   overflow: visible;
   border: none;
   box-shadow: none;
@@ -112,7 +113,8 @@ ul.nav-list {
 // Media queries for row state
 @mixin expand-menu-media-query ($width) {
   @media (min-width: $width) {
-    display: none;
+    display: none !important;
+    & ~ .collapse-button { display: flex; }
     & + ul.nav-list { @include navbar-list-row; }
   }
 }
@@ -171,6 +173,10 @@ ul.nav-list {
 }
 
 .navbar > .collapse-button {
+  & ~ .collapse-button {
+    display: none;
+  }
+
   & ~ ul.nav-list {
     @include navbar-list-column;
     @include dropdown-initial;

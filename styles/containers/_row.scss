@@ -116,6 +116,10 @@ $secondary-opacity: .6;
   > .icon { @include row-column; }
   > .spacer { @include row-spacer; }
   > .cell, > .toolbar, > nav { @include row-cell; }
+  > .row-button {
+    @include row-cell;
+    @include button-hover;
+  }
   > .block, > .button { @include row-block; }
   > .splitter { @include row-splitter; }
 

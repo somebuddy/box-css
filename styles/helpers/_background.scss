@@ -12,6 +12,15 @@ $line-height: 1.5rem !default;
   background-size: 100% $line-height * 2;
 }
 
+@function lined-gradient($line-color, $line-width: 1px, $offset-y: 0, $background-color: transparent) {
+  @return linear-gradient(to bottom, #{$line-color} 0, #{$line-color} #{$line-width}, transparent #{$line-width}, transparent 100%) 0 #{$offset-y} #{$background-color};
+}
+
+@mixin lined-background($size, $args...) {
+  background: lined-gradient($args...);
+  background-size: 100% $size;
+}
+
 .striped-gray-background {
   @include striped-background(white, $color1: rgba(0,0,0,.1));
 }

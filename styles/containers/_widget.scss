@@ -29,8 +29,6 @@ $widget-border-width: 2px;
   }
 }
 
-
-
 .widget {
   @include widget-layout;
   @include widget-colorize;
@@ -38,5 +36,9 @@ $widget-border-width: 2px;
   @include widget-colorize(red, #d50000, white, transparentize(white, .93));
   @include widget-colorize(purple, purple, white, transparentize(white, .93));
   @include widget-colorize(yellow, #FFE082, #263238, transparentize(white, .93));
-  @include widget-colorize(note, #FFECB3, #212121, transparentize(#FF6D00, .95));
+  @include widget-colorize(note, $color: #263238, $border-color: transparentize(#FF6D00, .95));
+}
+
+.widget.note {
+  @include lined-background($line-height, transparentize(#DD2C00, .9), 2px, calc(.75rem - 2px), #FFECB3);
 }

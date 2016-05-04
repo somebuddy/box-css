@@ -1,0 +1,42 @@
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+$widget-border-width: 2px;
+
+@mixin widget-layout () {
+  @include flex-column;
+  padding: calc(#{$line-height/2} - #{$widget-border-width}) calc(#{$column-width} - #{$widget-border-width});
+  margin: $line-height/2 $column-width/2;
+  position: relative;
+  overflow: hidden;
+  border: $widget-border-width solid;
+  border-radius: $line-height/8;
+  cursor: pointer;
+  @include box-shadow(1);
+  @include no-select;
+  transition: all .3s ease;
+
+  &:hover {
+    @include box-shadow(2);
+  }
+}
+
+@mixin widget-colorize($cls: null, $background: transparent, $color: inherit, $border-color: transparent) {
+  $selector: if($cls, "&." + $cls, "&");
+  #{$selector} {
+    color: $color;
+    background: $background;
+    border-color: $border-color;
+  }
+}
+
+
+
+.widget {
+  @include widget-layout;
+  @include widget-colorize;
+  @include widget-colorize(white, white, #555, transparentize(#555, .93));
+  @include widget-colorize(red, #d50000, white, transparentize(white, .93));
+  @include widget-colorize(purple, purple, white, transparentize(white, .93));
+  @include widget-colorize(yellow, #FFE082, #263238, transparentize(white, .93));
+  @include widget-colorize(note, #FFECB3, #212121, transparentize(#FF6D00, .95));
+}

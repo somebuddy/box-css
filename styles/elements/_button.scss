@@ -44,7 +44,6 @@ $button-border-width: 1px !default;
 
 @mixin button-colorize($cls: null, $color: inherit, $bkg: transparentize(white, 0.8), $border: null) {
   $selector: if($cls, "&." + $cls, "&");
-  @debug $selector;
   #{$selector} {
     color: $color;
     background: $bkg;

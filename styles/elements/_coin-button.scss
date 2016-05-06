@@ -1,0 +1,84 @@
+$line-height: 1.5rem !default;
+$secondary-opacity: .6 !default;
+$coin-button-size: 2*$line-height !default;
+
+@mixin coin-button-layout () {
+  @include flex-inline-center;
+  @include no-select;
+  @include button-hover;
+  @include min-size($coin-button-size, $coin-button-size);
+  font-family: FontAwesome;
+  position: relative;
+  opacity: 1;
+
+  &:before, &:after {
+    @include absolute($top: .1 * $coin-button-size, $left: .1 * $coin-button-size);
+    @include size($coin-button-size * 0.8, $coin-button-size * 0.8);
+    @include flex-center;
+    border-radius: 50%;
+
+    transition: all .3s ease;
+  }
+
+  &:before {
+    content: attr(icon);
+  }
+
+  &:after {
+    content: attr(hover-icon);
+  }
+}
+
+@mixin coin-button-styles () {
+  font-size: .875rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .5);
+
+  &:before, &:after {
+    font-size: 1rem;
+    font-weight: 600;
+    background: rgba(0, 0, 0, .1);
+    color: rgba(0, 0, 0, .2);
+  }
+}
+
+@mixin coin-button-hover-effect () {
+  &:before, &:hover:after {
+    transform: scale(1);
+  }
+
+  &:before {
+    opacity: $secondary-opacity;
+  }
+
+  &:hover:after {
+    opacity: 1;
+  }
+
+  &:after, &:hover:before {
+    opacity: 0;
+    transform: scale(0.01);
+  }
+
+  &:before {
+    background: rgba(#263238, .1);
+    color: rgba(#263238, .4);
+  }
+
+  &:after {
+    background: rgba(#455A64, .6);
+    color: rgba(255, 255, 255, .8);
+  }
+
+  // &:before { content: "\f02e"; }
+  // &:after {
+  //   content: "\f024";
+  //   background: rgba(#d50000, .9);
+  // }
+}
+
+.coin-button {
+  @include coin-button-layout;
+  @include coin-button-styles;
+  @include coin-button-hover-effect;
+}

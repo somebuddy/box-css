@@ -13,7 +13,6 @@ $hover-link-color: white !default;
   @include reset-link;
   @extend .row;
   min-height: $navbar-height;
-  margin-bottom: $line-height;
   border-width: 0;
   font-weight: 500;
   flex-wrap: wrap;

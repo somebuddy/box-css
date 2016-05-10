@@ -3,17 +3,34 @@ $col-width: 1rem !default;
 $navbar-height: $line-height * 2;
 $footer-font-size: 0.75rem;
 
-@mixin page-block-element () {
-  @include flex-child-fixed;
-  padding: $line-height/2 $col-width;
-}
-
-.page {
+@mixin page-layout {
   @include size(100%, 100%);
   @include relative;
   @include flex-column;
   overflow-y: auto;
+}
 
+/*
+** Page components
+*/
+
+@mixin page-block-element {
+  @include flex-child-fixed;
+  padding: $line-height/2 $col-width;
+}
+
+@mixin fixed-navbar () {
+  @include fixed(0, 0, auto, 0);
+  @include box-shadow(2);
+  height: $navbar-height;
+  z-index: 1000;
+
+  & ~ header {
+    margin-top: $navbar-height;
+  }
+}
+
+@mixin page-components {
   > header, .page-header,
   > .content, .page-content,
   > aside, .page-aside,
@@ -23,6 +40,7 @@ $footer-font-size: 0.75rem;
 
   > nav {
     @include flex-child-fixed;
+    overflow-y: hidden;
     order: -99;
   }
 
@@ -43,15 +61,12 @@ $footer-font-size: 0.75rem;
 
   @media (min-height: 60rem) {
     > nav {
-      @include fixed(0, 0, auto, 0);
-      @include box-shadow(2);
-      height: $navbar-height;
-      z-index: 1000;
+      @include fixed-navbar;
     }
+  }
 
-    > header {
-      margin-top: $navbar-height;
-    }
+  > nav.fixed {
+    @include fixed-navbar;
   }
 
   @media (min-width: 40rem) {
@@ -88,4 +103,9 @@ $footer-font-size: 0.75rem;
   @media (min-width: 60rem) {
     > aside, .page-aside { max-width: 25%; }
   }
+}
+
+.page {
+  @include page-layout;
+  @include page-components;
 }

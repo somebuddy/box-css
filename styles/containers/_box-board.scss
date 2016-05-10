@@ -1,0 +1,107 @@
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+
+$board-box-space: 0.25rem !default;
+$min-box-width: 20rem;
+$max-columns: 10 !default;
+$max-box-board-width: 60rem;
+$board-horizontal-margin: $column-width !default;
+
+@function board-width($columns: 1, $box-width: $min-box-width, $space: $board-box-space) {
+  @return $columns * ($box-width + $space) + $space;
+}
+
+@mixin box-board-layout($space: $board-box-space) {
+  @include flex-column;
+  margin: 0 auto;
+  padding: $board-box-space 0 0;
+
+  > header, > article, > footer {
+    flex: 0 0 auto;
+    margin-bottom: $board-box-space;
+  }
+}
+
+@mixin box-board-list-layout ($max-width: $max-box-board-width, $space: $board-box-space) {
+  @include box-board-layout($space);
+  max-width: $max-width;
+
+  > header, > article, > footer {
+    max-width: $max-width;
+  }
+}
+
+@mixin box-board {
+  @include box-board-layout;
+
+  $breakpoint: board-width(2) + $board-horizontal-margin;
+
+  @media (min-width: $breakpoint) {
+    @include flex-rows;
+    justify-content: center;
+
+    > header, > article, > footer {
+      margin: $board-box-space/2;
+    }
+
+    > header, > footer, > .full-row {
+      @include flex-child-fluid($basis: 100%);
+    }
+
+    > article {
+      @include flex-child-fluid($basis: 33%);
+    }
+  }
+
+  @for $i from 3 to ($max-columns + 1) {
+    $breakpoint: board-width($i) + $board-horizontal-margin;
+
+    @media (min-width: $breakpoint) {
+      > article {
+        flex-basis: 100% / $i;
+      }
+    }
+  }
+}
+
+
+@mixin box-board-fixed-grid($box-width) {
+  $max-width: board-width(2);
+  $breakpoint: $max-width + $board-horizontal-margin + 2rem; // for scroll bar additional space
+  @media (min-width: $breakpoint) {
+    max-width: $max-width;
+    justify-content: flex-start;
+
+    > article:not(.full-row) {
+      width: $box-width;
+      @include flex-child-fixed($box-width);
+    }
+  }
+
+  @for $i from 3 to ($max-columns + 1) {
+    $max-width: board-width($i);
+    $breakpoint: $max-width + $board-horizontal-margin + 2rem; // for scroll bar additional space
+
+    @media (min-width: $breakpoint) {
+      max-width: $max-width;
+    }
+  }
+}
+
+.box-board {
+  @include box-board;
+
+  > header,
+  > article,
+  > footer {
+    padding: $line-height/2 $column-width;
+  }
+}
+
+.box-board.list {
+  @include box-board-list-layout;
+}
+
+.box-board.fixed-grid {
+  @include box-board-fixed-grid($min-box-width);
+}

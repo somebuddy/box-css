@@ -32,3 +32,18 @@
   padding: .125rem .5rem;
   border: 1px solid rgba(0,0,0,.5);
 }
+
+.example .box-board > header {
+  color: white;
+  background-color: #004D40;
+}
+
+.example .box-board > article {
+  color: white;
+  background-color: #d50000;
+}
+
+.example .box-board > footer {
+  color: white;
+  background-color: #E65100;
+}

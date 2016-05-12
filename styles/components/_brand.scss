@@ -18,7 +18,7 @@ $brand-icon-size: $line-height * 2;
   > .icon, > .logo {
     @include flex-center;
     @include size($brand-icon-size, $brand-icon-size);
-    font-size: 1.5em;
+    font-size: $line-height;
     margin-right: $column-width / 2;
   }
 

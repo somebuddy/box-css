@@ -1,8 +1,6 @@
 /* Variables */
-$header-color: #111;
-$subheader-color: lighter(#111, 10%);
-$heading-base-font-weight: 400;
-$base-font-size: 1rem;
+$heading-base-font-weight: 400 !default;
+$base-font-size: 1rem !default;
 
 $heading-sizes: (
   h1: 2.25,

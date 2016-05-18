@@ -1,6 +1,6 @@
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
-$tag-base-height: $line-height / 2;
+$tag-base-height: $line-height / 2 !default;
 
 .tag {
   @include flex-inline-center;
@@ -8,8 +8,6 @@ $tag-base-height: $line-height / 2;
   font-size: $tag-base-height;
   line-height: $tag-base-height;
   padding: ($tag-base-height / 3) ($column-width / 2);
-  margin: ($tag-base-height / 6) ($column-width / 2);
-  margin-left: 0;
   border-radius: .25rem;
   border: 1px solid;
   @include box_shadow(1);
@@ -25,5 +23,10 @@ $tag-base-height: $line-height / 2;
 
 .tags {
   @include row-layout;
-  .tags { align-self: center; }
+
+  .tag {
+    align-self: center;
+    margin: ($tag-base-height / 6) ($column-width / 2) ($tag-base-height / 6) 0;
+    margin-left: 0;
+  }
 }

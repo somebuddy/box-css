@@ -26,6 +26,7 @@ $button-border-width: 1px !default;
 @mixin button-styles {
   border-radius: .25rem;
   font-size: .875rem;
+  line-height: $line-height;
   font-weight: 500;
 }
 
@@ -75,6 +76,7 @@ $button-border-width: 1px !default;
 button,
 input[type="button"],
 .button {
+  @include reset-link;
   @include reset-button;
   @include button-default;
 

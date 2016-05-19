@@ -1,20 +1,21 @@
 $line-height: 1.5rem !default;
+$column-width: 1rem !default;
 $secondary-opacity: .6 !default;
-$coin-button-size: 2*$line-height !default;
+$coin-button-size: 5.5 / 3 * $line-height !default;
 
 @mixin coin-button-layout () {
   @include flex-inline-center;
   @include no-select;
   @include button-hover;
   @include min-size($coin-button-size, $coin-button-size);
-  font-family: FontAwesome;
   position: relative;
-  opacity: 1;
+  padding-left: $coin-button-size;
 
   &:before, &:after {
     @include absolute($top: .1 * $coin-button-size, $left: .1 * $coin-button-size);
     @include size($coin-button-size * 0.8, $coin-button-size * 0.8);
     @include flex-center;
+    font-family: FontAwesome;
     border-radius: 50%;
 
     transition: all .3s ease;
@@ -26,6 +27,15 @@ $coin-button-size: 2*$line-height !default;
 
   &:after {
     content: attr(hover-icon);
+  }
+
+  &:not(:empty) {
+    padding-left: $coin-button-size + $column-width/2;
+    padding-right: $column-width;
+
+    &:before, &:after {
+      left: .1 * $coin-button-size + $column-width/4;
+    }
   }
 }
 
@@ -68,16 +78,14 @@ $coin-button-size: 2*$line-height !default;
     background: rgba(#455A64, .6);
     color: rgba(255, 255, 255, .8);
   }
-
-  // &:before { content: "\f02e"; }
-  // &:after {
-  //   content: "\f024";
-  //   background: rgba(#d50000, .9);
-  // }
 }
 
-.coin-button {
+@mixin coin-button {
   @include coin-button-layout;
   @include coin-button-styles;
   @include coin-button-hover-effect;
+}
+
+.coin-button {
+  @include coin-button;
 }

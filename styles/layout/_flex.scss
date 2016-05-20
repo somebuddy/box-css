@@ -86,6 +86,11 @@
   @include flex-align(stretch, stretch);
 }
 
+@mixin flex-inline-column {
+  @include flex-inline(column);
+  @include flex-align(stretch, stretch);
+}
+
 @mixin flex-columns {
   @include flex-column;
   flex-wrap: wrap;

@@ -1,13 +1,16 @@
+/*
+** Styles for one row container
+*/
 
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 
-$row-border-width: 2px;
-$row-padding: $column-width;
-$row-child-margin: $column-width;
+$row-border-width: 2px !default;
+$row-padding: $column-width !default;
+$row-child-margin: $column-width !default;
 
-$row-marker-size: $line-height;
-$secondary-opacity: .6;
+$row-marker-size: $line-height !default;
+$secondary-opacity: .6 !default;
 
 @mixin row-layout {
   @include flex-row;
@@ -127,11 +130,24 @@ $secondary-opacity: .6;
   > .static { opacity: $secondary-opacity; }
 }
 
+@mixin row-container {
+  @include row-layout;
+  @include row-components;
+  min-height: $line-height*2;
+}
+
+@mixin row-element {
+  @include row-container;
+  width: 100%;
+  border-top: $row-border-width solid transparent;
+  border-bottom: $row-border-width solid transparent;
+}
+
 .row {
   @include row-layout;
   @include row-components;
-  width: 100%;
   min-height: $line-height*2;
+  width: 100%;
   border-top: $row-border-width solid transparent;
   border-bottom: $row-border-width solid transparent;
 }

@@ -7,7 +7,7 @@ $tag-base-height: $line-height / 2 !default;
   @include text-ellipsis(nowrap);
   font-size: $tag-base-height;
   line-height: $tag-base-height;
-  padding: ($tag-base-height / 3) ($column-width / 2);
+  padding: calc(#{$tag-base-height / 3} - 1px) ($column-width / 2);
   border-radius: .25rem;
   border: 1px solid;
   @include box_shadow(1);
@@ -22,7 +22,7 @@ $tag-base-height: $line-height / 2 !default;
 }
 
 .tags {
-  @include row-layout;
+  @include row-container;
 
   .tag {
     align-self: center;

@@ -1,7 +1,7 @@
 $line-height: 1.5rem !default;
 $col-width: 1rem !default;
-$navbar-height: $line-height * 2;
-$footer-font-size: 0.75rem;
+$navbar-height: $line-height * 2 !default;
+$footer-font-size: 0.75rem !default;
 
 @mixin page-layout {
   @include size(100%, 100%);
@@ -71,6 +71,7 @@ $footer-font-size: 0.75rem;
 
   @media (min-width: 40rem) {
     @include flex-rows;
+    align-content: flex-start;
 
     > nav,
     > header, .page-header,

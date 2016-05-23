@@ -108,7 +108,11 @@ $secondary-opacity: .6 !default;
 @mixin row-block {
   /* element with own height */
   align-self: center;
+  margin-top: 0;
+  margin-bottom: 0;
   & + .cell { margin-left: 0; }
+  &:first-child { margin-left: 0; }
+  &:last-child { margin-right: 0; }
 }
 
 @mixin row-components {

@@ -124,7 +124,7 @@ ul.nav-list {
   min-height: 0;
   padding-bottom: 0;
   border-bottom-width: 0;
-  transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
+  transition: min-height .5s ease, padding-top .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
   transition-delay: .5s;
 
   > * {
@@ -137,9 +137,10 @@ ul.nav-list {
 // Expanded
 @mixin dropdown-final {
   min-height: $navbar-height;
+  padding-top: $line-height;
   padding-bottom: $line-height;
   border-bottom-width: 2px;
-  transition: min-height .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
+  transition: min-height .5s ease, padding-top .5s ease, padding-bottom .5s ease, border-bottom-width .3s ease;
 
   > * {
     margin-top: 0;
